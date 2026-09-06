@@ -8,31 +8,32 @@
 
   <meta
     name="description"
-    content="Brenden Diggs — cybersecurity professional working across identity engineering, IAM, GRC, AI governance, automation, compliance, and enterprise risk."
+    content="Brenden Diggs. Cybersecurity professional working across identity engineering, IAM, governance, risk, compliance, AI governance, and security automation."
   >
 
   <style>
     :root {
-      --bg: #0a1016;
-      --surface: #101820;
-      --surface-2: #15202a;
-      --surface-3: #192631;
+      --bg: #0b1117;
+      --bg-alt: #0f171f;
+      --panel: #121c25;
+      --panel-soft: #16222c;
 
-      --text: #f4f7f9;
-      --muted: #a6b2bc;
-      --subtle: #72818e;
+      --text: #f4f6f8;
+      --text-soft: #c8d0d7;
+      --muted: #9ba8b4;
+      --subtle: #73818d;
 
-      --border: #26333e;
-      --border-soft: #1b2832;
+      --line: #283642;
+      --line-soft: #1c2933;
 
       --blue: #72add9;
-      --blue-light: #a9d1ed;
-      --blue-dark: #172a39;
+      --blue-light: #a9d3ef;
+      --blue-deep: #183047;
 
-      --green: #7fc49f;
-      --amber: #d1b46e;
+      --green: #83c9a4;
+      --gold: #d2b66f;
 
-      --max-width: 1180px;
+      --max: 1200px;
     }
 
     * {
@@ -50,6 +51,8 @@
       color: var(--text);
 
       font-family:
+        "Avenir Next",
+        Avenir,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
@@ -67,39 +70,37 @@
     }
 
     .container {
-      width: min(92%, var(--max-width));
+      width: min(92%, var(--max));
       margin: 0 auto;
     }
 
-    /* =========================================
-       NAVIGATION
-    ========================================= */
+    /* NAVIGATION */
 
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
 
-      background: rgba(10, 16, 22, 0.96);
-      backdrop-filter: blur(14px);
+      background: rgba(11, 17, 23, 0.96);
+      border-bottom: 1px solid var(--line);
 
-      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
     }
 
     .nav-inner {
-      min-height: 70px;
+      min-height: 72px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      gap: 28px;
+      gap: 32px;
     }
 
     .brand {
-      font-size: 0.84rem;
+      font-size: 0.9rem;
       font-weight: 750;
-      letter-spacing: 0.17em;
+      letter-spacing: 0.16em;
       white-space: nowrap;
     }
 
@@ -110,8 +111,8 @@
 
       list-style: none;
 
-      color: var(--muted);
-      font-size: 0.88rem;
+      color: var(--text-soft);
+      font-size: 0.9rem;
     }
 
     .nav-links a {
@@ -122,52 +123,51 @@
       color: var(--blue-light);
     }
 
-    /* =========================================
-       HERO
-    ========================================= */
+    /* HERO */
 
     .hero {
-      padding: 120px 0 100px;
-      border-bottom: 1px solid var(--border);
+      padding: 112px 0 96px;
+      border-bottom: 1px solid var(--line);
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.45fr 0.55fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 90px;
-      align-items: end;
+      align-items: center;
     }
 
-    .eyebrow {
-      margin-bottom: 22px;
+    .hero-kicker {
+      margin-bottom: 18px;
 
       color: var(--blue);
 
-      font-size: 0.76rem;
+      font-size: 0.82rem;
       font-weight: 750;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
     }
 
     h1 {
-      max-width: 900px;
+      max-width: 760px;
 
-      font-size: clamp(3.4rem, 7vw, 6.3rem);
-      line-height: 0.98;
+      font-size: clamp(3.2rem, 6.6vw, 6rem);
+      line-height: 1;
       letter-spacing: -0.055em;
-      font-weight: 720;
+      font-weight: 700;
     }
 
-    .hero-accent {
+    .hero-highlight {
       color: var(--blue-light);
     }
 
     .hero-copy {
-      max-width: 800px;
-      margin-top: 30px;
+      max-width: 760px;
+      margin-top: 28px;
 
       color: var(--muted);
-      font-size: 1.15rem;
+
+      font-size: 1.17rem;
       line-height: 1.75;
     }
 
@@ -180,16 +180,16 @@
     }
 
     .button {
-      min-height: 46px;
-      padding: 0 19px;
+      min-height: 48px;
+      padding: 0 20px;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
 
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       font-weight: 700;
 
       transition: 150ms ease;
@@ -198,7 +198,7 @@
     .button-primary {
       background: var(--blue);
       border-color: var(--blue);
-      color: #071018;
+      color: #08111a;
     }
 
     .button-primary:hover {
@@ -206,79 +206,86 @@
       border-color: var(--blue-light);
     }
 
-    .button-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue-light);
+    .button-secondary {
+      color: var(--text);
     }
 
+    .button-secondary:hover {
+      color: var(--blue-light);
+      border-color: var(--blue);
+    }
+
+    /* PROFESSIONAL SUMMARY */
+
     .profile-summary {
-      border-left: 1px solid var(--border);
-      padding-left: 30px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
     .summary-item {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border-soft);
+      padding: 21px 0;
+      border-bottom: 1px solid var(--line-soft);
     }
 
-    .summary-item:first-child {
-      padding-top: 0;
+    .summary-item:last-child {
+      border-bottom: 0;
     }
 
     .summary-label {
-      margin-bottom: 5px;
+      margin-bottom: 7px;
 
       color: var(--blue);
 
-      font-size: 0.68rem;
-      font-weight: 750;
-      letter-spacing: 0.13em;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .summary-value {
-      color: #c5ced6;
-      font-size: 0.93rem;
-      line-height: 1.55;
+      color: var(--text-soft);
+
+      font-size: 1.08rem;
+      font-weight: 520;
+      line-height: 1.6;
     }
 
-    /* =========================================
-       AUTUMN SOLUTIONS
-    ========================================= */
+    /* AUTUMN SOLUTIONS */
 
     .enterprise {
-      padding: 60px 0;
+      padding: 62px 0;
 
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--line);
     }
 
     .enterprise-grid {
       display: grid;
-      grid-template-columns: 175px 1fr;
-      gap: 46px;
+      grid-template-columns: 190px 1fr;
+      gap: 48px;
+      align-items: start;
     }
 
-    .section-code {
-      padding-top: 7px;
+    .section-marker {
+      padding-top: 8px;
 
       color: var(--blue);
 
-      font-size: 0.73rem;
-      font-weight: 750;
-      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
     .enterprise-content {
       display: grid;
       grid-template-columns: 0.65fr 1.35fr;
-      gap: 60px;
-      align-items: start;
+      gap: 62px;
     }
 
     .enterprise-content h2 {
-      font-size: 1.9rem;
+      font-size: 2rem;
+      line-height: 1.2;
       letter-spacing: -0.03em;
       font-weight: 680;
     }
@@ -287,398 +294,364 @@
       max-width: 720px;
 
       color: var(--muted);
-      font-size: 1rem;
+
+      font-size: 1.04rem;
+      line-height: 1.75;
     }
 
-    /* =========================================
-       SHARED SECTIONS
-    ========================================= */
+    /* SECTION STRUCTURE */
 
-    section.content-section {
+    .content-section {
       padding: 108px 0;
     }
 
     .section-header {
       display: grid;
-      grid-template-columns: 175px 1fr;
-      gap: 46px;
+      grid-template-columns: 190px 1fr;
+      gap: 48px;
 
-      margin-bottom: 62px;
+      margin-bottom: 64px;
     }
 
     .section-title {
-      max-width: 900px;
+      max-width: 920px;
 
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      line-height: 1.03;
+      font-size: clamp(2.8rem, 5vw, 4.6rem);
+      line-height: 1.04;
       letter-spacing: -0.045em;
       font-weight: 680;
     }
 
     .section-description {
-      max-width: 820px;
+      max-width: 830px;
       margin-top: 20px;
 
       color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.75;
+
+      font-size: 1.1rem;
+      line-height: 1.78;
     }
 
-    /* =========================================
-       IAM PROJECTS
-    ========================================= */
+    /* IAM PROJECTS */
 
     .project-list {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
     }
 
-    .project-row {
-      padding: 48px 0;
-
+    .project {
       display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 38px;
+      grid-template-columns: 115px 1fr;
+      gap: 42px;
 
-      border-bottom: 1px solid var(--border);
+      padding: 54px 0;
+
+      border-bottom: 1px solid var(--line);
     }
 
-    .project-code {
+    .project-id {
       padding-top: 7px;
 
       color: var(--blue);
 
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.11em;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
     }
 
-    .project-main {
-      max-width: 900px;
+    .project-body {
+      max-width: 930px;
     }
 
-    .project-header {
+    .project-heading {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
-      gap: 24px;
+      justify-content: space-between;
+      gap: 30px;
     }
 
-    .project-main h3 {
-      font-size: clamp(1.6rem, 2.8vw, 2rem);
-      line-height: 1.2;
+    .project-heading h3 {
+      max-width: 700px;
+
+      font-size: clamp(1.8rem, 3vw, 2.25rem);
+      line-height: 1.18;
       letter-spacing: -0.03em;
       font-weight: 680;
-    }
-
-    .project-main p {
-      max-width: 790px;
-      margin-top: 14px;
-
-      color: var(--muted);
-      font-size: 1.02rem;
-      line-height: 1.75;
     }
 
     .status {
       flex-shrink: 0;
 
-      padding-top: 6px;
+      margin-top: 6px;
 
-      font-size: 0.7rem;
-      font-weight: 750;
+      font-size: 0.77rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .complete {
+      color: var(--green);
+    }
+
+    .progress {
+      color: var(--gold);
+    }
+
+    .project-description {
+      max-width: 790px;
+      margin-top: 16px;
+
+      color: var(--muted);
+
+      font-size: 1.06rem;
+      line-height: 1.78;
+    }
+
+    .skill-heading {
+      margin-top: 30px;
+      margin-bottom: 13px;
+
+      color: var(--blue);
+
+      font-size: 0.78rem;
+      font-weight: 800;
       letter-spacing: 0.11em;
       text-transform: uppercase;
     }
 
-    .status-complete {
-      color: var(--green);
-    }
-
-    .status-progress {
-      color: var(--amber);
-    }
-
-    .tech-label {
-      margin-top: 26px;
-      margin-bottom: 11px;
-
-      color: var(--blue);
-
-      font-size: 0.69rem;
-      font-weight: 750;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-
-    .project-tech {
+    .skill-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 10px;
     }
 
-    .project-tech span {
-      padding: 8px 11px;
+    .skill-list span {
+      padding: 10px 14px;
 
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      border: 1px solid #344654;
 
-      color: #cbd4dc;
+      color: #d7dfe5;
 
-      font-size: 0.84rem;
-      font-weight: 550;
-
+      font-size: 0.94rem;
+      font-weight: 600;
       line-height: 1.2;
     }
 
-    /* =========================================
-       GRC
-    ========================================= */
+    /* GRC */
 
     .grc-section {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
     .grc-list {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
     }
 
     .grc-project {
-      padding: 42px 0;
-
       display: grid;
-      grid-template-columns: 190px 1fr;
-      gap: 40px;
+      grid-template-columns: 200px 1fr;
+      gap: 45px;
 
-      border-bottom: 1px solid var(--border);
+      padding: 50px 0;
+
+      border-bottom: 1px solid var(--line);
     }
 
-    .grc-type {
+    .grc-category {
       padding-top: 7px;
 
       color: var(--blue);
 
-      font-size: 0.72rem;
-      font-weight: 750;
-      letter-spacing: 0.12em;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .grc-main {
-      max-width: 900px;
+    .grc-body {
+      max-width: 920px;
     }
 
-    .grc-main h3 {
-      font-size: clamp(1.55rem, 2.5vw, 1.9rem);
-      line-height: 1.25;
-      letter-spacing: -0.025em;
+    .grc-body h3 {
+      max-width: 800px;
+
+      font-size: clamp(1.7rem, 2.8vw, 2.1rem);
+      line-height: 1.24;
+      letter-spacing: -0.028em;
       font-weight: 680;
     }
 
-    .grc-main p {
-      max-width: 780px;
-      margin-top: 13px;
+    .grc-description {
+      max-width: 790px;
+      margin-top: 15px;
 
       color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.72;
+
+      font-size: 1.04rem;
+      line-height: 1.76;
     }
 
-    .framework-label {
-      margin-top: 24px;
-      margin-bottom: 10px;
-
-      color: var(--blue);
-
-      font-size: 0.69rem;
-      font-weight: 750;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-
-    .frameworks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .frameworks span {
-      padding: 8px 11px;
-
-      background: var(--surface-3);
-      border: 1px solid var(--border);
-
-      color: #cbd4dc;
-
-      font-size: 0.84rem;
-      font-weight: 550;
-
-      line-height: 1.2;
-    }
-
-    /* =========================================
-       CAPABILITIES
-    ========================================= */
+    /* CAPABILITIES */
 
     .capability-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
 
-      border-top: 1px solid var(--border);
-      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
     }
 
     .capability {
-      min-height: 245px;
-      padding: 34px;
+      min-height: 260px;
+      padding: 36px;
 
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
     .capability h3 {
-      font-size: 1.3rem;
+      font-size: 1.45rem;
       line-height: 1.25;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
       font-weight: 680;
     }
 
     .capability p {
-      margin-top: 14px;
+      margin-top: 15px;
 
       color: var(--muted);
-      font-size: 0.97rem;
-      line-height: 1.7;
+
+      font-size: 1.02rem;
+      line-height: 1.75;
     }
 
-    /* =========================================
-       ABOUT
-    ========================================= */
+    /* ABOUT */
 
     .about-section {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
     }
 
     .about-grid {
       display: grid;
-      grid-template-columns: 0.75fr 1.25fr;
-      gap: 85px;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 90px;
     }
 
     .about-heading {
-      margin-top: 15px;
+      margin-top: 16px;
 
-      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-size: clamp(2.5rem, 4.3vw, 4rem);
       line-height: 1.07;
       letter-spacing: -0.04em;
       font-weight: 680;
     }
 
+    .about-copy {
+      max-width: 720px;
+    }
+
     .about-copy p {
-      margin-bottom: 21px;
+      margin-bottom: 22px;
 
       color: var(--muted);
-      font-size: 1.02rem;
-      line-height: 1.75;
+
+      font-size: 1.05rem;
+      line-height: 1.78;
     }
 
     .principles {
-      margin-top: 34px;
-      border-top: 1px solid var(--border);
+      margin-top: 35px;
+      border-top: 1px solid var(--line);
     }
 
     .principle {
-      padding: 18px 0;
-
       display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 22px;
+      grid-template-columns: 150px 1fr;
+      gap: 24px;
 
-      border-bottom: 1px solid var(--border-soft);
+      padding: 20px 0;
+
+      border-bottom: 1px solid var(--line-soft);
     }
 
     .principle strong {
-      font-size: 0.87rem;
+      font-size: 0.95rem;
+      color: var(--text);
     }
 
     .principle span {
       color: var(--muted);
-      font-size: 0.87rem;
+      font-size: 0.94rem;
     }
 
-    /* =========================================
-       FOOTER
-    ========================================= */
+    /* FOOTER */
 
     footer {
-      padding: 30px 0;
+      padding: 32px 0;
 
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
 
       color: var(--subtle);
-      font-size: 0.81rem;
+      font-size: 0.84rem;
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
-      gap: 20px;
+      gap: 24px;
     }
 
-    /* =========================================
-       RESPONSIVE
-    ========================================= */
+    /* RESPONSIVE */
 
-    @media (max-width: 900px) {
+    @media (max-width: 920px) {
       .hero-grid,
       .about-grid,
       .enterprise-content {
         grid-template-columns: 1fr;
       }
 
-      .profile-summary {
-        border-left: 0;
-        border-top: 1px solid var(--border);
-
-        padding-left: 0;
-        padding-top: 26px;
+      .hero-grid {
+        gap: 55px;
       }
 
-      .project-header {
+      .project-heading {
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
       }
 
       .grc-project {
-        grid-template-columns: 150px 1fr;
+        grid-template-columns: 160px 1fr;
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 720px) {
       .nav-links {
         gap: 16px;
-        font-size: 0.76rem;
+        font-size: 0.78rem;
       }
 
       .brand {
-        font-size: 0.69rem;
+        font-size: 0.72rem;
       }
 
       .hero {
-        padding: 88px 0 75px;
+        padding: 88px 0 74px;
       }
 
-      section.content-section {
+      .content-section {
         padding: 78px 0;
       }
 
       .section-header,
       .enterprise-grid,
-      .project-row,
+      .project,
       .grc-project {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 16px;
       }
 
       .capability-grid {
@@ -687,11 +660,29 @@
 
       .principle {
         grid-template-columns: 1fr;
-        gap: 4px;
+        gap: 5px;
       }
 
       .footer-inner {
         flex-direction: column;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .nav-links li:nth-child(3) {
+        display: none;
+      }
+
+      h1 {
+        font-size: 3.1rem;
+      }
+
+      .summary-value {
+        font-size: 1rem;
+      }
+
+      .skill-list span {
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -702,6 +693,7 @@
 
 
   <nav>
+
     <div class="container nav-inner">
 
       <a href="#top" class="brand">
@@ -709,9 +701,18 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="#iam">IAM</a></li>
-        <li><a href="#grc">GRC</a></li>
-        <li><a href="#about">About</a></li>
+
+        <li>
+          <a href="#iam">IAM</a>
+        </li>
+
+        <li>
+          <a href="#grc">GRC</a>
+        </li>
+
+        <li>
+          <a href="#about">About</a>
+        </li>
 
         <li>
           <a
@@ -722,9 +723,11 @@
             GitHub
           </a>
         </li>
+
       </ul>
 
     </div>
+
   </nav>
 
 
@@ -740,33 +743,42 @@
 
         <div>
 
-          <div class="eyebrow">
+          <div class="hero-kicker">
             Cybersecurity · Identity · Governance
           </div>
 
           <h1>
-            Engineering access.
+            Identity engineering
             <br>
-            <span class="hero-accent">
-              Governing risk.
+            and
+            <span class="hero-highlight">
+              security governance.
             </span>
           </h1>
 
           <p class="hero-copy">
-            I work across identity engineering, cybersecurity governance,
-            automation, risk, compliance, and AI governance — building
-            technical controls and evaluating how those controls support
-            secure business decisions.
+            I design, operate, and assess security controls across identity
+            engineering, access governance, cybersecurity risk, compliance,
+            third-party risk, and AI governance. My work combines technical
+            implementation with the governance and business context behind
+            security decisions.
           </p>
+
 
           <div class="hero-actions">
 
-            <a href="#iam" class="button button-primary">
-              IAM Projects
+            <a
+              href="#iam"
+              class="button button-primary"
+            >
+              View IAM Projects
             </a>
 
-            <a href="#grc" class="button button-secondary">
-              GRC & AI Governance
+            <a
+              href="#grc"
+              class="button button-secondary"
+            >
+              View GRC Projects
             </a>
 
           </div>
@@ -775,6 +787,7 @@
 
 
         <aside class="profile-summary">
+
 
           <div class="summary-item">
 
@@ -827,6 +840,7 @@
 
           </div>
 
+
         </aside>
 
       </div>
@@ -835,13 +849,14 @@
 
 
 
-    <!-- AUTUMN SOLUTIONS -->
+    <!-- ENTERPRISE PORTFOLIO -->
 
     <div class="enterprise">
 
       <div class="container enterprise-grid">
 
-        <div class="section-code">
+
+        <div class="section-marker">
           Enterprise Portfolio
         </div>
 
@@ -853,11 +868,10 @@
           </h2>
 
           <p>
-            A fictional enterprise used across this portfolio to model a
-            connected cybersecurity program. Identity engineering, access
-            governance, risk management, compliance, third-party risk, and
-            AI governance are implemented within the same organization rather
-            than presented as unrelated labs.
+            Autumn Solutions is the fictional enterprise used throughout this
+            portfolio. The projects model one connected security program across
+            identity engineering, access governance, risk management,
+            compliance, third-party risk, and AI governance.
           </p>
 
         </div>
@@ -870,14 +884,17 @@
 
     <!-- IAM -->
 
-    <section id="iam" class="content-section">
+    <section
+      id="iam"
+      class="content-section"
+    >
 
       <div class="container">
 
 
         <div class="section-header">
 
-          <div class="section-code">
+          <div class="section-marker">
             01 / IAM
           </div>
 
@@ -889,10 +906,9 @@
             </h2>
 
             <p class="section-description">
-              The Autumn Solutions identity program covers the complete access
-              lifecycle — authentication, Zero Trust, federation, lifecycle
-              automation, privileged access, entitlement governance,
-              access reviews, and revocation.
+              The Autumn Solutions identity program covers authentication,
+              Zero Trust, federation, lifecycle automation, privileged access,
+              entitlement governance, access reviews, and revocation.
             </p>
 
           </div>
@@ -906,29 +922,30 @@
 
           <!-- IAM 01 -->
 
-          <article class="project-row">
+          <article class="project">
 
-            <div class="project-code">
+            <div class="project-id">
               IAM-01
             </div>
 
 
-            <div class="project-main">
+            <div class="project-body">
 
-              <div class="project-header">
+
+              <div class="project-heading">
 
                 <h3>
                   Zero Trust Identity Security
                 </h3>
 
-                <span class="status status-complete">
+                <span class="status complete">
                   Complete
                 </span>
 
               </div>
 
 
-              <p>
+              <p class="project-description">
                 Designed workforce and privileged identity controls using
                 strong authentication, Conditional Access, identity risk,
                 least privilege, privileged access management, and
@@ -936,17 +953,19 @@
               </p>
 
 
-              <div class="tech-label">
+              <div class="skill-heading">
                 Technologies & Controls
               </div>
 
 
-              <div class="project-tech">
+              <div class="skill-list">
+
                 <span>Conditional Access</span>
                 <span>MFA</span>
                 <span>PIM</span>
                 <span>Identity Protection</span>
                 <span>Emergency Access</span>
+
               </div>
 
             </div>
@@ -957,46 +976,49 @@
 
           <!-- IAM 02 -->
 
-          <article class="project-row">
+          <article class="project">
 
-            <div class="project-code">
+            <div class="project-id">
               IAM-02
             </div>
 
 
-            <div class="project-main">
+            <div class="project-body">
 
-              <div class="project-header">
+
+              <div class="project-heading">
 
                 <h3>
                   Enterprise SSO & Federation
                 </h3>
 
-                <span class="status status-complete">
+                <span class="status complete">
                   Complete
                 </span>
 
               </div>
 
 
-              <p>
-                Implemented authentication and provisioning for a custom SaaS
-                application using SAML, OpenID Connect, OAuth 2.0 Authorization
-                Code with PKCE, Microsoft Graph, and SCIM.
+              <p class="project-description">
+                Implemented authentication and provisioning for a custom
+                SaaS application using SAML, OpenID Connect, OAuth 2.0
+                Authorization Code with PKCE, Microsoft Graph, and SCIM.
               </p>
 
 
-              <div class="tech-label">
+              <div class="skill-heading">
                 Technologies & Protocols
               </div>
 
 
-              <div class="project-tech">
+              <div class="skill-list">
+
                 <span>SAML 2.0</span>
                 <span>OpenID Connect</span>
                 <span>OAuth 2.0 + PKCE</span>
                 <span>SCIM</span>
                 <span>Microsoft Graph</span>
+
               </div>
 
             </div>
@@ -1007,29 +1029,30 @@
 
           <!-- IAM 03 -->
 
-          <article class="project-row">
+          <article class="project">
 
-            <div class="project-code">
+            <div class="project-id">
               IAM-03
             </div>
 
 
-            <div class="project-main">
+            <div class="project-body">
 
-              <div class="project-header">
+
+              <div class="project-heading">
 
                 <h3>
                   Identity Lifecycle Automation
                 </h3>
 
-                <span class="status status-complete">
+                <span class="status complete">
                   Complete
                 </span>
 
               </div>
 
 
-              <p>
+              <p class="project-description">
                 Built a certificate-authenticated Joiner, Mover, Leaver
                 workflow driven by an HR source with automated account
                 creation, group assignment, license management, movement,
@@ -1037,17 +1060,19 @@
               </p>
 
 
-              <div class="tech-label">
+              <div class="skill-heading">
                 Technologies & Automation
               </div>
 
 
-              <div class="project-tech">
+              <div class="skill-list">
+
                 <span>Microsoft Graph</span>
                 <span>Node.js</span>
                 <span>JML Automation</span>
                 <span>Certificate Authentication</span>
                 <span>Audit Logging</span>
+
               </div>
 
             </div>
@@ -1058,29 +1083,30 @@
 
           <!-- IAM 04 -->
 
-          <article class="project-row">
+          <article class="project">
 
-            <div class="project-code">
+            <div class="project-id">
               IAM-04
             </div>
 
 
-            <div class="project-main">
+            <div class="project-body">
 
-              <div class="project-header">
+
+              <div class="project-heading">
 
                 <h3>
                   Governed Finance Access Lifecycle
                 </h3>
 
-                <span class="status status-progress">
+                <span class="status progress">
                   In Progress
                 </span>
 
               </div>
 
 
-              <p>
+              <p class="project-description">
                 Designed time-bound access to finance resources using
                 business justification, approval workflows, entitlement
                 provisioning, expiration controls, recurring access reviews,
@@ -1088,17 +1114,19 @@
               </p>
 
 
-              <div class="tech-label">
+              <div class="skill-heading">
                 Governance Controls
               </div>
 
 
-              <div class="project-tech">
+              <div class="skill-list">
+
                 <span>Entitlement Management</span>
                 <span>Access Packages</span>
                 <span>Approval Workflows</span>
                 <span>Access Reviews</span>
                 <span>Governance-Driven Revocation</span>
+
               </div>
 
             </div>
@@ -1109,47 +1137,49 @@
 
           <!-- IAM 05 -->
 
-          <article class="project-row">
+          <article class="project">
 
-            <div class="project-code">
+            <div class="project-id">
               IAM-05
             </div>
 
 
-            <div class="project-main">
+            <div class="project-body">
 
-              <div class="project-header">
+
+              <div class="project-heading">
 
                 <h3>
                   Identity Threat & Workload Security
                 </h3>
 
-                <span class="status status-progress">
+                <span class="status progress">
                   Planned
                 </span>
 
               </div>
 
 
-              <p>
-                Extending the Autumn Solutions identity program into
-                workload identities, non-human access, credential risk,
-                identity threat detection, and automated workload
-                identity assessment.
+              <p class="project-description">
+                Extending the Autumn Solutions identity program into workload
+                identities, non-human access, credential risk, identity threat
+                detection, and automated workload identity assessment.
               </p>
 
 
-              <div class="tech-label">
+              <div class="skill-heading">
                 Technologies & Security
               </div>
 
 
-              <div class="project-tech">
+              <div class="skill-list">
+
                 <span>Workload Identities</span>
                 <span>Service Principals</span>
                 <span>Microsoft Graph</span>
                 <span>Python</span>
                 <span>Identity Threat Detection</span>
+
               </div>
 
             </div>
@@ -1167,14 +1197,17 @@
 
     <!-- GRC -->
 
-    <section id="grc" class="content-section grc-section">
+    <section
+      id="grc"
+      class="content-section grc-section"
+    >
 
       <div class="container">
 
 
         <div class="section-header">
 
-          <div class="section-code">
+          <div class="section-marker">
             02 / GRC
           </div>
 
@@ -1204,34 +1237,37 @@
 
           <article class="grc-project">
 
-            <div class="grc-type">
+            <div class="grc-category">
               Risk Management
             </div>
 
 
-            <div class="grc-main">
+            <div class="grc-body">
 
               <h3>
                 NIST CSF & ISO 27001 Risk Assessment and Risk Register
               </h3>
 
-              <p>
+              <p class="grc-description">
                 Built an enterprise cybersecurity risk assessment covering
                 asset inventory, risk scoring, control mapping, treatment
                 planning, remediation tracking, and risk ownership.
               </p>
 
 
-              <div class="framework-label">
+              <div class="skill-heading">
                 Frameworks & Methods
               </div>
 
 
-              <div class="frameworks">
+              <div class="skill-list">
+
                 <span>NIST CSF</span>
                 <span>ISO 27001</span>
                 <span>Risk Register</span>
                 <span>Control Mapping</span>
+                <span>Risk Treatment</span>
+
               </div>
 
             </div>
@@ -1244,35 +1280,37 @@
 
           <article class="grc-project">
 
-            <div class="grc-type">
+            <div class="grc-category">
               AI Governance
             </div>
 
 
-            <div class="grc-main">
+            <div class="grc-body">
 
               <h3>
                 AI Governance Program and AI Risk Register
               </h3>
 
-              <p>
+              <p class="grc-description">
                 Designed governance for enterprise AI use cases including
-                intake, system inventory, risk classification,
-                acceptable-use guidance, governance workflows,
-                and AI risk treatment.
+                intake, system inventory, risk classification, acceptable-use
+                guidance, governance workflows, and AI risk treatment.
               </p>
 
 
-              <div class="framework-label">
+              <div class="skill-heading">
                 Frameworks & Methods
               </div>
 
 
-              <div class="frameworks">
+              <div class="skill-list">
+
                 <span>NIST AI RMF</span>
                 <span>AI Risk Register</span>
                 <span>Risk Classification</span>
+                <span>AI Governance</span>
                 <span>Governance Workflows</span>
+
               </div>
 
             </div>
@@ -1285,34 +1323,37 @@
 
           <article class="grc-project">
 
-            <div class="grc-type">
+            <div class="grc-category">
               Audit & Assurance
             </div>
 
 
-            <div class="grc-main">
+            <div class="grc-body">
 
               <h3>
                 SOC 2 & ISO 27001 Audit Readiness
               </h3>
 
-              <p>
+              <p class="grc-description">
                 Developed an audit-readiness program covering control
                 documentation, evidence collection, access reviews,
                 control testing, audit tracking, and remediation planning.
               </p>
 
 
-              <div class="framework-label">
+              <div class="skill-heading">
                 Frameworks & Methods
               </div>
 
 
-              <div class="frameworks">
+              <div class="skill-list">
+
                 <span>SOC 2</span>
                 <span>ISO 27001</span>
                 <span>Evidence Collection</span>
                 <span>Control Testing</span>
+                <span>Audit Readiness</span>
+
               </div>
 
             </div>
@@ -1325,34 +1366,37 @@
 
           <article class="grc-project">
 
-            <div class="grc-type">
+            <div class="grc-category">
               AI Assurance
             </div>
 
 
-            <div class="grc-main">
+            <div class="grc-body">
 
               <h3>
                 ISO 42001 AI Management System Audit Readiness
               </h3>
 
-              <p>
+              <p class="grc-description">
                 Built an AI management-system readiness package including
                 policy documentation, AI impact assessments, evidence
                 tracking, control testing, and management review support.
               </p>
 
 
-              <div class="framework-label">
+              <div class="skill-heading">
                 Frameworks & Methods
               </div>
 
 
-              <div class="frameworks">
+              <div class="skill-list">
+
                 <span>ISO 42001</span>
                 <span>AI Impact Assessment</span>
                 <span>Audit Evidence</span>
                 <span>Control Testing</span>
+                <span>Management Review</span>
+
               </div>
 
             </div>
@@ -1365,34 +1409,37 @@
 
           <article class="grc-project">
 
-            <div class="grc-type">
+            <div class="grc-category">
               Third-Party Risk
             </div>
 
 
-            <div class="grc-main">
+            <div class="grc-body">
 
               <h3>
                 Third-Party Risk Management Program
               </h3>
 
-              <p>
+              <p class="grc-description">
                 Designed enterprise vendor governance covering onboarding,
                 due diligence, SOC 2 review, vendor tiering, contractual
                 requirements, risk scoring, and remediation tracking.
               </p>
 
 
-              <div class="framework-label">
+              <div class="skill-heading">
                 Frameworks & Methods
               </div>
 
 
-              <div class="frameworks">
+              <div class="skill-list">
+
                 <span>TPRM</span>
                 <span>Vendor Risk</span>
                 <span>SOC 2 Review</span>
                 <span>Due Diligence</span>
+                <span>Risk Tiering</span>
+
               </div>
 
             </div>
@@ -1405,34 +1452,37 @@
 
           <article class="grc-project">
 
-            <div class="grc-type">
+            <div class="grc-category">
               AI Third-Party Risk
             </div>
 
 
-            <div class="grc-main">
+            <div class="grc-body">
 
               <h3>
                 Third-Party AI Risk & Vendor Governance
               </h3>
 
-              <p>
+              <p class="grc-description">
                 Created governance for AI-enabled vendors covering intake,
                 data-use review, contractual controls, vendor risk scoring,
                 exception management, and higher-risk AI monitoring.
               </p>
 
 
-              <div class="framework-label">
+              <div class="skill-heading">
                 Frameworks & Methods
               </div>
 
 
-              <div class="frameworks">
+              <div class="skill-list">
+
                 <span>AI Vendor Governance</span>
                 <span>Data-Use Review</span>
                 <span>Risk Scoring</span>
                 <span>Exception Management</span>
+                <span>AI Monitoring</span>
+
               </div>
 
             </div>
@@ -1457,20 +1507,20 @@
 
         <div class="section-header">
 
-          <div class="section-code">
-            03 / CAPABILITIES
+          <div class="section-marker">
+            03 / Capabilities
           </div>
 
 
           <div>
 
             <h2 class="section-title">
-              Engineering and governance capabilities.
+              Technical and governance capabilities
             </h2>
 
             <p class="section-description">
-              Practical technical implementation paired with security,
-              compliance, assurance, risk, and governance experience.
+              Hands-on engineering experience paired with risk, compliance,
+              assurance, and governance work.
             </p>
 
           </div>
@@ -1520,8 +1570,8 @@
 
             <p>
               Risk assessments, risk registers, control mapping,
-              evidence collection, audit readiness, control testing,
-              remediation planning, exception management, and compliance.
+              compliance analysis, audit readiness, evidence collection,
+              control testing, remediation planning, and exception management.
             </p>
 
           </div>
@@ -1534,9 +1584,9 @@
             </h3>
 
             <p>
-              NIST CSF, ISO 27001, SOC 2, CIS Controls,
-              NIST SP 800-53, NIST AI RMF, ISO 42001,
-              and related governance and assurance practices.
+              NIST CSF, ISO 27001, SOC 2, CIS Controls, NIST SP 800-53,
+              NIST AI RMF, ISO 42001, and related security assurance
+              practices.
             </p>
 
           </div>
@@ -1549,9 +1599,9 @@
             </h3>
 
             <p>
-              Vendor onboarding, due diligence, SOC 2 review,
-              risk tiering, contractual requirements, remediation
-              tracking, vendor governance, and AI third-party risk.
+              Vendor onboarding, due diligence, SOC 2 review, risk tiering,
+              contractual requirements, remediation tracking, vendor
+              governance, and AI third-party risk.
             </p>
 
           </div>
@@ -1564,7 +1614,7 @@
             </h3>
 
             <p>
-              AI use-case intake, system inventories, risk classification,
+              AI use-case intake, AI system inventories, risk classification,
               impact assessment, acceptable-use governance, vendor review,
               ISO 42001 readiness, and ongoing AI risk monitoring.
             </p>
@@ -1582,19 +1632,22 @@
 
     <!-- ABOUT -->
 
-    <section id="about" class="content-section about-section">
+    <section
+      id="about"
+      class="content-section about-section"
+    >
 
       <div class="container about-grid">
 
 
         <div>
 
-          <div class="section-code">
-            04 / ABOUT
+          <div class="section-marker">
+            04 / About
           </div>
 
           <h2 class="about-heading">
-            Technical security with governance context.
+            Security engineering with governance context
           </h2>
 
         </div>
@@ -1604,26 +1657,27 @@
 
           <p>
             I work across identity engineering, cybersecurity governance,
-            automation, risk, and compliance.
+            automation, risk, compliance, and AI governance.
           </p>
 
           <p>
             My identity work focuses on how access is authenticated,
             authorized, provisioned, governed, reviewed, and removed
-            across the enterprise lifecycle.
+            throughout the enterprise lifecycle.
           </p>
 
           <p>
             My GRC and AI governance work evaluates security from the
             complementary perspective of risk, control effectiveness,
-            assurance, third-party exposure, compliance, and responsible
+            compliance, assurance, third-party exposure, and responsible
             technology governance.
           </p>
 
           <p>
-            Together, the Autumn Solutions projects demonstrate how security
-            engineering and governance operate within the same enterprise
-            rather than as separate disciplines.
+            The Autumn Solutions portfolio brings these disciplines together
+            inside one enterprise environment. The goal is to show how
+            technical security controls and governance decisions support
+            each other in practice.
           </p>
 
 
@@ -1635,8 +1689,7 @@
               <strong>Identity</strong>
 
               <span>
-                Secure workforce, application, privileged,
-                and workload access.
+                Secure workforce, application, privileged, and workload access.
               </span>
 
             </div>
@@ -1647,8 +1700,8 @@
               <strong>Engineering</strong>
 
               <span>
-                Automate identity operations and integrate systems through
-                APIs, Python, Node.js, shell, and repeatable workflows.
+                Build automation and integrations using Microsoft Graph,
+                Node.js, Python, shell, and repeatable workflows.
               </span>
 
             </div>
@@ -1659,8 +1712,8 @@
               <strong>Governance</strong>
 
               <span>
-                Keep access and technology decisions justified,
-                reviewable, controlled, and accountable.
+                Keep access and technology decisions controlled, documented,
+                reviewable, and accountable.
               </span>
 
             </div>
@@ -1671,8 +1724,8 @@
               <strong>Risk</strong>
 
               <span>
-                Connect controls to business impact, assurance,
-                compliance, and remediation.
+                Connect controls to business impact, compliance, assurance,
+                and remediation.
               </span>
 
             </div>
