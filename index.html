@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Brenden Diggs | Cybersecurity, Identity & Governance</title>
+  <title>Brenden Diggs | Identity Engineering, GRC & AI Governance</title>
 
   <meta
     name="description"
@@ -13,27 +13,30 @@
 
   <style>
     :root {
-      --bg: #0b1117;
-      --bg-alt: #0f171f;
-      --panel: #121c25;
-      --panel-soft: #16222c;
+      --background: #f5f7f9;
+      --surface: #ffffff;
+      --surface-soft: #eef3f7;
+      --surface-blue: #e8f1f8;
 
-      --text: #f4f6f8;
-      --text-soft: #c8d0d7;
-      --muted: #9ba8b4;
-      --subtle: #73818d;
+      --navy: #102233;
+      --navy-deep: #0b1926;
+      --navy-soft: #20394f;
 
-      --line: #283642;
-      --line-soft: #1c2933;
+      --text: #16202a;
+      --text-soft: #43515d;
+      --muted: #687784;
 
-      --blue: #72add9;
-      --blue-light: #a9d3ef;
-      --blue-deep: #183047;
+      --blue: #316f9e;
+      --blue-dark: #24587f;
+      --blue-light: #dcebf6;
 
-      --green: #83c9a4;
-      --gold: #d2b66f;
+      --border: #d4dde4;
+      --border-strong: #bcc9d3;
 
-      --max: 1200px;
+      --green: #287a54;
+      --amber: #8d6820;
+
+      --max-width: 1200px;
     }
 
     * {
@@ -47,12 +50,10 @@
     }
 
     body {
-      background: var(--bg);
+      background: var(--background);
       color: var(--text);
 
       font-family:
-        "Avenir Next",
-        Avenir,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
@@ -70,7 +71,7 @@
     }
 
     .container {
-      width: min(92%, var(--max));
+      width: min(92%, var(--max-width));
       margin: 0 auto;
     }
 
@@ -81,10 +82,9 @@
       top: 0;
       z-index: 100;
 
-      background: rgba(11, 17, 23, 0.96);
-      border-bottom: 1px solid var(--line);
-
-      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
     }
 
     .nav-inner {
@@ -98,10 +98,10 @@
     }
 
     .brand {
-      font-size: 0.9rem;
+      color: var(--navy);
+
+      font-size: 1rem;
       font-weight: 750;
-      letter-spacing: 0.16em;
-      white-space: nowrap;
     }
 
     .nav-links {
@@ -112,62 +112,56 @@
       list-style: none;
 
       color: var(--text-soft);
-      font-size: 0.9rem;
-    }
-
-    .nav-links a {
-      transition: color 150ms ease;
+      font-size: 0.95rem;
+      font-weight: 550;
     }
 
     .nav-links a:hover {
-      color: var(--blue-light);
+      color: var(--blue);
     }
 
     /* HERO */
 
     .hero {
-      padding: 112px 0 96px;
-      border-bottom: 1px solid var(--line);
+      padding: 105px 0 84px;
+
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 90px;
-      align-items: center;
+    .hero-intro {
+      max-width: 970px;
     }
 
-    .hero-kicker {
-      margin-bottom: 18px;
+    .hero-label {
+      margin-bottom: 20px;
 
       color: var(--blue);
 
-      font-size: 0.82rem;
-      font-weight: 750;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 760px;
-
-      font-size: clamp(3.2rem, 6.6vw, 6rem);
-      line-height: 1;
-      letter-spacing: -0.055em;
+      font-size: 1rem;
       font-weight: 700;
     }
 
-    .hero-highlight {
-      color: var(--blue-light);
+    h1 {
+      color: var(--navy);
+
+      font-size: clamp(3.4rem, 7vw, 6.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+
+    .hero-second-line {
+      color: var(--blue-dark);
     }
 
     .hero-copy {
-      max-width: 760px;
-      margin-top: 28px;
+      max-width: 820px;
+      margin-top: 30px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
-      font-size: 1.17rem;
+      font-size: 1.2rem;
       line-height: 1.75;
     }
 
@@ -181,110 +175,114 @@
 
     .button {
       min-height: 48px;
-      padding: 0 20px;
+      padding: 0 21px;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
-      border: 1px solid var(--line);
+      border: 1px solid var(--border-strong);
 
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 700;
 
       transition: 150ms ease;
     }
 
     .button-primary {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #08111a;
+      background: var(--navy);
+      border-color: var(--navy);
+
+      color: #ffffff;
     }
 
     .button-primary:hover {
-      background: var(--blue-light);
-      border-color: var(--blue-light);
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
     }
 
     .button-secondary {
-      color: var(--text);
+      background: #ffffff;
+      color: var(--navy);
     }
 
     .button-secondary:hover {
-      color: var(--blue-light);
       border-color: var(--blue);
+      color: var(--blue-dark);
     }
 
     /* PROFESSIONAL SUMMARY */
 
-    .profile-summary {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+    .professional-summary {
+      margin-top: 74px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
     }
 
     .summary-item {
-      padding: 21px 0;
-      border-bottom: 1px solid var(--line-soft);
-    }
+      min-height: 145px;
+      padding: 27px 30px;
 
-    .summary-item:last-child {
-      border-bottom: 0;
+      background: var(--surface-soft);
+
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .summary-label {
-      margin-bottom: 7px;
+      margin-bottom: 10px;
 
-      color: var(--blue);
+      color: var(--blue-dark);
 
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 750;
     }
 
     .summary-value {
-      color: var(--text-soft);
+      color: var(--navy);
 
-      font-size: 1.08rem;
-      font-weight: 520;
-      line-height: 1.6;
+      font-size: 1.18rem;
+      font-weight: 580;
+      line-height: 1.55;
     }
 
     /* AUTUMN SOLUTIONS */
 
     .enterprise {
-      padding: 62px 0;
+      padding: 68px 0;
 
-      background: var(--bg-alt);
-      border-bottom: 1px solid var(--line);
+      background: var(--navy-deep);
+      color: #ffffff;
     }
 
     .enterprise-grid {
       display: grid;
       grid-template-columns: 190px 1fr;
-      gap: 48px;
-      align-items: start;
+      gap: 50px;
     }
 
     .section-marker {
-      padding-top: 8px;
+      padding-top: 7px;
 
-      color: var(--blue);
+      color: #9ec6e2;
 
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
+      font-size: 0.88rem;
+      font-weight: 750;
     }
 
     .enterprise-content {
       display: grid;
-      grid-template-columns: 0.65fr 1.35fr;
-      gap: 62px;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 65px;
+      align-items: start;
     }
 
     .enterprise-content h2 {
-      font-size: 2rem;
+      font-size: 2.15rem;
       line-height: 1.2;
       letter-spacing: -0.03em;
       font-weight: 680;
@@ -293,86 +291,94 @@
     .enterprise-content p {
       max-width: 720px;
 
-      color: var(--muted);
+      color: #c4d1dc;
 
-      font-size: 1.04rem;
-      line-height: 1.75;
+      font-size: 1.08rem;
+      line-height: 1.78;
     }
 
-    /* SECTION STRUCTURE */
+    /* SHARED SECTIONS */
 
     .content-section {
-      padding: 108px 0;
+      padding: 110px 0;
     }
 
     .section-header {
       display: grid;
       grid-template-columns: 190px 1fr;
-      gap: 48px;
+      gap: 50px;
 
-      margin-bottom: 64px;
+      margin-bottom: 66px;
+    }
+
+    .section-header .section-marker {
+      color: var(--blue-dark);
     }
 
     .section-title {
       max-width: 920px;
 
+      color: var(--navy);
+
       font-size: clamp(2.8rem, 5vw, 4.6rem);
       line-height: 1.04;
       letter-spacing: -0.045em;
-      font-weight: 680;
+      font-weight: 700;
     }
 
     .section-description {
       max-width: 830px;
       margin-top: 20px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
-      font-size: 1.1rem;
+      font-size: 1.12rem;
       line-height: 1.78;
     }
 
     /* IAM PROJECTS */
 
     .project-list {
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--border-strong);
     }
 
     .project {
       display: grid;
-      grid-template-columns: 115px 1fr;
-      gap: 42px;
+      grid-template-columns: 110px 1fr;
+      gap: 45px;
 
-      padding: 54px 0;
+      padding: 56px 0;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--border);
     }
 
     .project-id {
       padding-top: 7px;
 
-      color: var(--blue);
+      color: var(--blue-dark);
 
-      font-size: 0.84rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
+      font-size: 0.95rem;
+      font-weight: 750;
     }
 
     .project-body {
-      max-width: 930px;
+      max-width: 950px;
     }
 
     .project-heading {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 30px;
+
+      gap: 28px;
     }
 
     .project-heading h3 {
-      max-width: 700px;
+      max-width: 760px;
 
-      font-size: clamp(1.8rem, 3vw, 2.25rem);
+      color: var(--navy);
+
+      font-size: clamp(1.9rem, 3vw, 2.35rem);
       line-height: 1.18;
       letter-spacing: -0.03em;
       font-weight: 680;
@@ -381,42 +387,44 @@
     .status {
       flex-shrink: 0;
 
-      margin-top: 6px;
+      padding: 7px 10px;
 
-      font-size: 0.77rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      border: 1px solid var(--border);
+
+      font-size: 0.82rem;
+      font-weight: 750;
     }
 
     .complete {
       color: var(--green);
+      background: #edf8f2;
+      border-color: #bcdac9;
     }
 
     .progress {
-      color: var(--gold);
+      color: var(--amber);
+      background: #fbf6e9;
+      border-color: #dfd0a5;
     }
 
     .project-description {
-      max-width: 790px;
-      margin-top: 16px;
+      max-width: 820px;
+      margin-top: 17px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
-      font-size: 1.06rem;
-      line-height: 1.78;
+      font-size: 1.08rem;
+      line-height: 1.8;
     }
 
     .skill-heading {
-      margin-top: 30px;
-      margin-bottom: 13px;
+      margin-top: 31px;
+      margin-bottom: 14px;
 
-      color: var(--blue);
+      color: var(--blue-dark);
 
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
+      font-size: 0.95rem;
+      font-weight: 750;
     }
 
     .skill-list {
@@ -428,12 +436,12 @@
     .skill-list span {
       padding: 10px 14px;
 
-      background: var(--panel-soft);
-      border: 1px solid #344654;
+      background: var(--surface-blue);
+      border: 1px solid #bfd2df;
 
-      color: #d7dfe5;
+      color: var(--navy);
 
-      font-size: 0.94rem;
+      font-size: 0.98rem;
       font-weight: 600;
       line-height: 1.2;
     }
@@ -441,98 +449,107 @@
     /* GRC */
 
     .grc-section {
-      background: var(--bg-alt);
+      background: #edf2f5;
 
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .grc-list {
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--border-strong);
     }
 
     .grc-project {
       display: grid;
       grid-template-columns: 200px 1fr;
-      gap: 45px;
+      gap: 48px;
 
-      padding: 50px 0;
+      padding: 52px 0;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--border);
     }
 
     .grc-category {
       padding-top: 7px;
 
-      color: var(--blue);
+      color: var(--blue-dark);
 
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 750;
     }
 
     .grc-body {
-      max-width: 920px;
+      max-width: 930px;
     }
 
     .grc-body h3 {
-      max-width: 800px;
+      max-width: 830px;
 
-      font-size: clamp(1.7rem, 2.8vw, 2.1rem);
-      line-height: 1.24;
+      color: var(--navy);
+
+      font-size: clamp(1.8rem, 2.8vw, 2.2rem);
+      line-height: 1.25;
       letter-spacing: -0.028em;
       font-weight: 680;
     }
 
     .grc-description {
-      max-width: 790px;
-      margin-top: 15px;
+      max-width: 800px;
+      margin-top: 16px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
-      font-size: 1.04rem;
-      line-height: 1.76;
+      font-size: 1.06rem;
+      line-height: 1.78;
     }
 
     /* CAPABILITIES */
 
+    .capability-section {
+      background: var(--surface);
+    }
+
     .capability-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
 
-      border-top: 1px solid var(--line);
-      border-left: 1px solid var(--line);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
     }
 
     .capability {
-      min-height: 260px;
-      padding: 36px;
+      min-height: 270px;
+      padding: 38px;
 
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+
+      background: #ffffff;
     }
 
     .capability h3 {
-      font-size: 1.45rem;
+      color: var(--navy);
+
+      font-size: 1.5rem;
       line-height: 1.25;
       letter-spacing: -0.025em;
       font-weight: 680;
     }
 
     .capability p {
-      margin-top: 15px;
+      margin-top: 16px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
-      font-size: 1.02rem;
-      line-height: 1.75;
+      font-size: 1.04rem;
+      line-height: 1.77;
     }
 
     /* ABOUT */
 
     .about-section {
-      border-top: 1px solid var(--line);
+      background: #f1f4f6;
+      border-top: 1px solid var(--border);
     }
 
     .about-grid {
@@ -542,7 +559,9 @@
     }
 
     .about-heading {
-      margin-top: 16px;
+      margin-top: 15px;
+
+      color: var(--navy);
 
       font-size: clamp(2.5rem, 4.3vw, 4rem);
       line-height: 1.07;
@@ -551,21 +570,22 @@
     }
 
     .about-copy {
-      max-width: 720px;
+      max-width: 730px;
     }
 
     .about-copy p {
       margin-bottom: 22px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
-      font-size: 1.05rem;
-      line-height: 1.78;
+      font-size: 1.07rem;
+      line-height: 1.8;
     }
 
     .principles {
-      margin-top: 35px;
-      border-top: 1px solid var(--line);
+      margin-top: 36px;
+
+      border-top: 1px solid var(--border-strong);
     }
 
     .principle {
@@ -573,54 +593,53 @@
       grid-template-columns: 150px 1fr;
       gap: 24px;
 
-      padding: 20px 0;
+      padding: 21px 0;
 
-      border-bottom: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--border);
     }
 
     .principle strong {
-      font-size: 0.95rem;
-      color: var(--text);
+      color: var(--navy);
+      font-size: 1rem;
     }
 
     .principle span {
-      color: var(--muted);
-      font-size: 0.94rem;
+      color: var(--text-soft);
+      font-size: 0.98rem;
     }
 
     /* FOOTER */
 
     footer {
-      padding: 32px 0;
+      padding: 34px 0;
 
-      border-top: 1px solid var(--line);
-
-      color: var(--subtle);
-      font-size: 0.84rem;
+      background: var(--navy-deep);
+      color: #aebdca;
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
       gap: 24px;
+
+      font-size: 0.88rem;
     }
 
     /* RESPONSIVE */
 
     @media (max-width: 920px) {
-      .hero-grid,
-      .about-grid,
-      .enterprise-content {
+      .enterprise-content,
+      .about-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-grid {
-        gap: 55px;
+      .professional-summary {
+        grid-template-columns: 1fr;
       }
 
       .project-heading {
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
       }
 
       .grc-project {
@@ -631,15 +650,15 @@
     @media (max-width: 720px) {
       .nav-links {
         gap: 16px;
-        font-size: 0.78rem;
+        font-size: 0.8rem;
       }
 
       .brand {
-        font-size: 0.72rem;
+        font-size: 0.82rem;
       }
 
       .hero {
-        padding: 88px 0 74px;
+        padding: 82px 0 70px;
       }
 
       .content-section {
@@ -674,15 +693,15 @@
       }
 
       h1 {
-        font-size: 3.1rem;
+        font-size: 3.05rem;
       }
 
       .summary-value {
-        font-size: 1rem;
+        font-size: 1.08rem;
       }
 
       .skill-list span {
-        font-size: 0.9rem;
+        font-size: 0.92rem;
       }
     }
   </style>
@@ -697,7 +716,7 @@
     <div class="container nav-inner">
 
       <a href="#top" class="brand">
-        BRENDEN DIGGS
+        Brenden Diggs
       </a>
 
       <ul class="nav-links">
@@ -738,21 +757,19 @@
 
     <section class="hero">
 
-      <div class="container hero-grid">
+      <div class="container">
 
+        <div class="hero-intro">
 
-        <div>
-
-          <div class="hero-kicker">
+          <div class="hero-label">
             Cybersecurity · Identity · Governance
           </div>
 
           <h1>
-            Identity engineering
+            Identity Engineering
             <br>
-            and
-            <span class="hero-highlight">
-              security governance.
+            <span class="hero-second-line">
+              GRC & AI Governance
             </span>
           </h1>
 
@@ -760,10 +777,9 @@
             I design, operate, and assess security controls across identity
             engineering, access governance, cybersecurity risk, compliance,
             third-party risk, and AI governance. My work combines technical
-            implementation with the governance and business context behind
+            implementation with the business and governance context behind
             security decisions.
           </p>
-
 
           <div class="hero-actions">
 
@@ -786,7 +802,7 @@
         </div>
 
 
-        <aside class="profile-summary">
+        <div class="professional-summary">
 
 
           <div class="summary-item">
@@ -841,7 +857,7 @@
           </div>
 
 
-        </aside>
+        </div>
 
       </div>
 
@@ -849,9 +865,9 @@
 
 
 
-    <!-- ENTERPRISE PORTFOLIO -->
+    <!-- AUTUMN SOLUTIONS -->
 
-    <div class="enterprise">
+    <section class="enterprise">
 
       <div class="container enterprise-grid">
 
@@ -878,7 +894,7 @@
 
       </div>
 
-    </div>
+    </section>
 
 
 
@@ -920,8 +936,6 @@
         <div class="project-list">
 
 
-          <!-- IAM 01 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -948,8 +962,8 @@
               <p class="project-description">
                 Designed workforce and privileged identity controls using
                 strong authentication, Conditional Access, identity risk,
-                least privilege, privileged access management, and
-                emergency access.
+                least privilege, privileged access management, and emergency
+                access.
               </p>
 
 
@@ -973,8 +987,6 @@
           </article>
 
 
-
-          <!-- IAM 02 -->
 
           <article class="project">
 
@@ -1000,9 +1012,9 @@
 
 
               <p class="project-description">
-                Implemented authentication and provisioning for a custom
-                SaaS application using SAML, OpenID Connect, OAuth 2.0
-                Authorization Code with PKCE, Microsoft Graph, and SCIM.
+                Implemented authentication and provisioning for a custom SaaS
+                application using SAML, OpenID Connect, OAuth 2.0 Authorization
+                Code with PKCE, Microsoft Graph, and SCIM.
               </p>
 
 
@@ -1026,8 +1038,6 @@
           </article>
 
 
-
-          <!-- IAM 03 -->
 
           <article class="project">
 
@@ -1081,8 +1091,6 @@
 
 
 
-          <!-- IAM 04 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1107,10 +1115,10 @@
 
 
               <p class="project-description">
-                Designed time-bound access to finance resources using
-                business justification, approval workflows, entitlement
-                provisioning, expiration controls, recurring access reviews,
-                and governance-driven revocation.
+                Designed time-bound access to finance resources using business
+                justification, approval workflows, entitlement provisioning,
+                expiration controls, recurring access reviews, and
+                governance-driven revocation.
               </p>
 
 
@@ -1134,8 +1142,6 @@
           </article>
 
 
-
-          <!-- IAM 05 -->
 
           <article class="project">
 
@@ -1215,13 +1221,13 @@
           <div>
 
             <h2 class="section-title">
-              Governance, Risk, Compliance & AI Governance
+              GRC & AI Governance
             </h2>
 
             <p class="section-description">
-              The Autumn Solutions GRC program applies enterprise frameworks
-              and assurance practices across cybersecurity risk, compliance,
-              audit readiness, third-party risk, and AI governance.
+              The Autumn Solutions governance program covers governance,
+              risk, compliance, audit readiness, third-party risk, and
+              responsible AI governance.
             </p>
 
           </div>
@@ -1232,8 +1238,6 @@
 
         <div class="grc-list">
 
-
-          <!-- GRC 01 -->
 
           <article class="grc-project">
 
@@ -1276,8 +1280,6 @@
 
 
 
-          <!-- GRC 02 -->
-
           <article class="grc-project">
 
             <div class="grc-category">
@@ -1318,8 +1320,6 @@
           </article>
 
 
-
-          <!-- GRC 03 -->
 
           <article class="grc-project">
 
@@ -1362,8 +1362,6 @@
 
 
 
-          <!-- GRC 04 -->
-
           <article class="grc-project">
 
             <div class="grc-category">
@@ -1405,8 +1403,6 @@
 
 
 
-          <!-- GRC 05 -->
-
           <article class="grc-project">
 
             <div class="grc-category">
@@ -1447,8 +1443,6 @@
           </article>
 
 
-
-          <!-- GRC 06 -->
 
           <article class="grc-project">
 
@@ -1500,7 +1494,7 @@
 
     <!-- CAPABILITIES -->
 
-    <section class="content-section">
+    <section class="content-section capability-section">
 
       <div class="container">
 
@@ -1515,7 +1509,7 @@
           <div>
 
             <h2 class="section-title">
-              Technical and governance capabilities
+              Technical & Governance Capabilities
             </h2>
 
             <p class="section-description">
@@ -1647,7 +1641,7 @@
           </div>
 
           <h2 class="about-heading">
-            Security engineering with governance context
+            Security Engineering With Governance Context
           </h2>
 
         </div>
@@ -1667,10 +1661,9 @@
           </p>
 
           <p>
-            My GRC and AI governance work evaluates security from the
-            complementary perspective of risk, control effectiveness,
-            compliance, assurance, third-party exposure, and responsible
-            technology governance.
+            My GRC and AI governance work evaluates security through risk,
+            control effectiveness, compliance, assurance, third-party
+            exposure, and responsible technology governance.
           </p>
 
           <p>
