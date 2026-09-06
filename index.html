@@ -5,29 +5,788 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Brenden Diggs | Identity & Cybersecurity Engineer</title>
+
+  <meta
+    name="description"
+    content="Brenden Diggs — Identity and Cybersecurity Engineer specializing in Microsoft Entra ID, identity governance, SSO, federation, automation, and security."
+  >
+
+  <style>
+    :root {
+      --bg: #070b12;
+      --bg-soft: #0d131d;
+      --card: rgba(18, 27, 40, 0.78);
+      --card-hover: rgba(24, 36, 53, 0.95);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f5f7fa;
+      --muted: #9aa7b8;
+      --accent: #61dafb;
+      --accent-2: #8b9cff;
+      --success: #6ee7b7;
+      --warning: #f6c76a;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background:
+        radial-gradient(circle at 20% 0%, rgba(97, 218, 251, 0.10), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(139, 156, 255, 0.10), transparent 30%),
+        var(--bg);
+
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 11, 18, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: 1.05rem;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(110, 231, 183, 0.65);
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 8vw, 6.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      max-width: 900px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 28px;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 10px;
+      font-weight: 750;
+      transition: 180ms ease;
+    }
+
+    .button-primary {
+      color: #071017;
+      background: linear-gradient(90deg, var(--accent), #9fe7ff);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(97, 218, 251, 0.35);
+      background: rgba(97, 218, 251, 0.05);
+    }
+
+    .skill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 44px;
+    }
+
+    .skill {
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+      padding: 8px 11px;
+      border-radius: 8px;
+      font-size: 0.83rem;
+    }
+
+    section {
+      padding: 95px 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 38px;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 5vw, 3.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .section-description {
+      color: var(--muted);
+      max-width: 570px;
+      justify-self: end;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 310px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      overflow: hidden;
+      transition: 180ms ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(97, 218, 251, 0.22);
+      background: var(--card-hover);
+    }
+
+    .project-number {
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      margin-top: 18px;
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    .project-card p {
+      margin-top: 13px;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      padding: 6px 9px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: #bbc6d3;
+      font-size: 0.75rem;
+    }
+
+    .status {
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .status-complete {
+      color: var(--success);
+      background: rgba(110, 231, 183, 0.06);
+    }
+
+    .status-progress {
+      color: var(--warning);
+      background: rgba(246, 199, 106, 0.06);
+    }
+
+    .wide-card {
+      grid-column: 1 / -1;
+    }
+
+    .grc-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.012);
+    }
+
+    .grc-card {
+      padding: 38px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .grc-card p {
+      max-width: 770px;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-size: 1.03rem;
+    }
+
+    .focus-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .focus-item {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .focus-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .focus-item span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .contact {
+      text-align: center;
+      padding-bottom: 110px;
+    }
+
+    .contact p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: 18px auto 28px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 820px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 90px;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .section-description {
+        justify-self: start;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wide-card {
+        grid-column: auto;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 70px 0;
+      }
+
+      .project-card,
+      .grc-card {
+        padding: 24px;
+      }
+
+      .focus-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <main>
-    <h1>Brenden Diggs</h1>
 
-    <h2>Identity & Cybersecurity Engineer</h2>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#top">BRENDEN<span>.</span></a>
 
-    <p>
-      Hands-on cybersecurity professional focused on identity engineering,
-      Microsoft Entra ID, identity governance, SSO, federation, and
-      identity lifecycle automation.
-    </p>
+      <ul class="nav-links">
+        <li><a href="#identity">Identity</a></li>
+        <li><a href="#grc">GRC</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://github.com/brendendiggs" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <h2>IAM Portfolio</h2>
+  <main id="top">
 
-    <ul>
-      <li>Zero Trust Identity Security</li>
-      <li>Enterprise SSO & Federation</li>
-      <li>Identity Lifecycle Automation</li>
-      <li>Identity Governance</li>
-      <li>Identity Threat & Workload Security</li>
-    </ul>
+    <section class="hero">
+      <div class="container">
+
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Identity Engineering Portfolio
+        </div>
+
+        <h1>
+          Brenden Diggs
+          <br>
+          <span class="gradient-text">Identity & Cybersecurity Engineer</span>
+        </h1>
+
+        <p class="hero-copy">
+          Building secure identity systems across Microsoft Entra ID,
+          identity governance, SSO and federation, lifecycle automation,
+          Zero Trust, and access security.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#identity">
+            Explore Identity Projects
+          </a>
+
+          <a
+            class="button button-secondary"
+            href="https://github.com/brendendiggs"
+            target="_blank"
+          >
+            View GitHub
+          </a>
+        </div>
+
+        <div class="skill-row">
+          <span class="skill">Microsoft Entra ID</span>
+          <span class="skill">Identity Governance</span>
+          <span class="skill">SAML</span>
+          <span class="skill">OIDC</span>
+          <span class="skill">OAuth 2.0</span>
+          <span class="skill">SCIM</span>
+          <span class="skill">Microsoft Graph</span>
+          <span class="skill">Conditional Access</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">Zero Trust</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="identity">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <div class="section-label">Identity Engineering</div>
+            <h2>Hands-on IAM projects.</h2>
+          </div>
+
+          <p class="section-description">
+            A practical identity engineering environment built around a
+            fictional enterprise, Autumn Solutions, covering security,
+            federation, automation, and identity governance.
+          </p>
+        </div>
+
+
+        <div class="project-grid">
+
+          <article class="project-card">
+            <span class="status status-complete">Complete</span>
+
+            <div class="project-number">Project 01</div>
+
+            <h3>Zero Trust Identity Security</h3>
+
+            <p>
+              Designed identity security controls for privileged and workforce
+              identities using Microsoft Entra ID.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Conditional Access</span>
+              <span class="tag">MFA</span>
+              <span class="tag">PIM</span>
+              <span class="tag">Identity Protection</span>
+              <span class="tag">Emergency Access</span>
+            </div>
+          </article>
+
+
+          <article class="project-card">
+            <span class="status status-complete">Complete</span>
+
+            <div class="project-number">Project 02</div>
+
+            <h3>Enterprise SSO & Federation</h3>
+
+            <p>
+              Implemented modern and federated authentication for a custom
+              SaaS application, including provisioning and identity lifecycle
+              integration.
+            </p>
+
+            <div class="tags">
+              <span class="tag">SAML 2.0</span>
+              <span class="tag">OIDC</span>
+              <span class="tag">OAuth 2.0 + PKCE</span>
+              <span class="tag">SCIM</span>
+              <span class="tag">Microsoft Graph</span>
+            </div>
+          </article>
+
+
+          <article class="project-card">
+            <span class="status status-complete">Complete</span>
+
+            <div class="project-number">Project 03</div>
+
+            <h3>Identity Lifecycle Automation</h3>
+
+            <p>
+              Built a certificate-authenticated Joiner, Mover, Leaver workflow
+              driven by an HR source with automated account, group, and license
+              lifecycle management.
+            </p>
+
+            <div class="tags">
+              <span class="tag">JML</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Microsoft Graph</span>
+              <span class="tag">Certificate Authentication</span>
+              <span class="tag">Audit Logging</span>
+            </div>
+          </article>
+
+
+          <article class="project-card">
+            <span class="status status-progress">In Progress</span>
+
+            <div class="project-number">Project 04</div>
+
+            <h3>Identity Governance</h3>
+
+            <p>
+              Implementing governed, time-bound finance access through request,
+              business justification, approval, entitlement provisioning,
+              access reviews, and governance-driven revocation.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Entitlement Management</span>
+              <span class="tag">Access Packages</span>
+              <span class="tag">Approvals</span>
+              <span class="tag">Access Reviews</span>
+              <span class="tag">IGA</span>
+            </div>
+          </article>
+
+
+          <article class="project-card wide-card">
+            <span class="status status-progress">Next</span>
+
+            <div class="project-number">Project 05</div>
+
+            <h3>Identity Threat & Workload Security</h3>
+
+            <p>
+              The next phase of the Autumn Solutions identity portfolio will
+              focus on identity threat detection, workload identities, and
+              securing non-human access.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Workload Identity</span>
+              <span class="tag">Identity Threats</span>
+              <span class="tag">Microsoft Entra</span>
+              <span class="tag">Security Engineering</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="grc" class="grc-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <div class="section-label">Governance, Risk & Compliance</div>
+            <h2>Security beyond the control plane.</h2>
+          </div>
+
+          <p class="section-description">
+            GRC case studies will complement the identity portfolio with
+            security risk, governance, compliance, and business-focused
+            security work.
+          </p>
+        </div>
+
+        <div class="grc-card">
+          <div class="project-number">GRC Portfolio</div>
+
+          <h3 style="margin-top: 16px; font-size: 1.6rem;">
+            Selected case studies coming soon
+          </h3>
+
+          <p>
+            Existing governance, risk, compliance, third-party risk, and
+            AI governance projects are being migrated into this portfolio.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Risk Assessment</span>
+            <span class="tag">Compliance</span>
+            <span class="tag">Third-Party Risk</span>
+            <span class="tag">AI Governance</span>
+            <span class="tag">Security Controls</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="about">
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div>
+            <div class="section-label">About</div>
+            <h2>Security built around identity.</h2>
+          </div>
+
+          <div class="about-copy">
+            <p>
+              I focus on the intersection of identity engineering,
+              cybersecurity, governance, and automation.
+            </p>
+
+            <p>
+              My portfolio is designed around realistic enterprise scenarios
+              rather than isolated product demonstrations — showing how access
+              is secured, provisioned, governed, reviewed, and removed across
+              the identity lifecycle.
+            </p>
+
+            <div class="focus-list">
+              <div class="focus-item">
+                <strong>Identity Security</strong>
+                <span>Least privilege, MFA, Zero Trust, privileged access</span>
+              </div>
+
+              <div class="focus-item">
+                <strong>Identity Governance</strong>
+                <span>Approvals, access packages, reviews, lifecycle controls</span>
+              </div>
+
+              <div class="focus-item">
+                <strong>Federation & SSO</strong>
+                <span>SAML, OIDC, OAuth 2.0, SCIM</span>
+              </div>
+
+              <div class="focus-item">
+                <strong>Automation</strong>
+                <span>Microsoft Graph, Node.js, lifecycle orchestration</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="contact">
+      <div class="container">
+        <div class="section-label">Technical Portfolio</div>
+
+        <h2>Explore the implementation.</h2>
+
+        <p>
+          Technical artifacts, documentation, automation, and project evidence
+          are being published alongside these case studies.
+        </p>
+
+        <a
+          class="button button-primary"
+          href="https://github.com/brendendiggs"
+          target="_blank"
+        >
+          Open GitHub
+        </a>
+      </div>
+    </section>
+
   </main>
+
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Brenden Diggs</span>
+      <span>Identity • Cybersecurity • Governance</span>
+    </div>
+  </footer>
+
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
