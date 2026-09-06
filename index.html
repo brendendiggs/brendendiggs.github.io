@@ -186,34 +186,27 @@
       align-items: center;
       justify-content: center;
 
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--gold);
 
       font-size: 0.94rem;
       font-weight: 700;
 
-      transition: 150ms ease;
+      transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
     }
 
-    .button-primary {
-      background: var(--gold);
-      border-color: var(--gold);
-
-      color: #17120b;
-    }
-
-    .button-primary:hover {
-      background: var(--gold-light);
-      border-color: var(--gold-light);
-    }
-
-    .button-secondary {
+    .button-equal {
       background: transparent;
+      border-color: var(--gold);
       color: var(--text);
     }
 
-    .button-secondary:hover {
+    .button-equal:hover {
+      background: var(--gold);
       border-color: var(--gold);
-      color: var(--gold-light);
+      color: #17120b;
     }
 
     /* PROFESSIONAL SUMMARY */
@@ -729,11 +722,11 @@
 
           <div class="hero-actions">
 
-            <a href="#iam" class="button button-primary">
+            <a href="#iam" class="button button-equal">
               View IAM Projects
             </a>
 
-            <a href="#grc" class="button button-secondary">
+            <a href="#grc" class="button button-equal">
               View GRC Projects
             </a>
 
@@ -872,8 +865,6 @@
         <div class="project-list">
 
 
-          <!-- IAM 01 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -919,8 +910,6 @@
 
 
 
-          <!-- IAM 02 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -964,8 +953,6 @@
           </article>
 
 
-
-          <!-- IAM 03 -->
 
           <article class="project">
 
@@ -1012,8 +999,6 @@
 
 
 
-          <!-- IAM 04 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1058,8 +1043,6 @@
           </article>
 
 
-
-          <!-- IAM 05 -->
 
           <article class="project">
 
@@ -1147,8 +1130,6 @@
         <div class="project-list">
 
 
-          <!-- GRC 01 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1197,8 +1178,6 @@
           </article>
 
 
-
-          <!-- GRC 02 -->
 
           <article class="project">
 
@@ -1249,8 +1228,6 @@
 
 
 
-          <!-- GRC 03 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1299,8 +1276,6 @@
           </article>
 
 
-
-          <!-- GRC 04 -->
 
           <article class="project">
 
@@ -1351,8 +1326,6 @@
 
 
 
-          <!-- GRC 05 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1401,8 +1374,6 @@
           </article>
 
 
-
-          <!-- GRC 06 -->
 
           <article class="project">
 
