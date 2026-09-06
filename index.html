@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Brenden Diggs — Identity and Cybersecurity Engineer portfolio covering IAM, Microsoft Entra ID, identity governance, automation, GRC, and AI governance."
+    content="Brenden Diggs — cybersecurity portfolio covering identity engineering, IAM, Microsoft Entra ID, automation, GRC, risk management, and AI governance."
   >
 
   <style>
@@ -69,9 +69,7 @@
       margin: 0 auto;
     }
 
-    /* ==============================
-       TOP NAV
-    ============================== */
+    /* NAVIGATION */
 
     nav {
       position: sticky;
@@ -118,9 +116,7 @@
       color: var(--blue);
     }
 
-    /* ==============================
-       HERO
-    ============================== */
+    /* HERO */
 
     .hero {
       padding: 125px 0 105px;
@@ -165,7 +161,7 @@
     }
 
     .hero-copy {
-      max-width: 760px;
+      max-width: 770px;
       margin-top: 30px;
 
       font-size: 1.14rem;
@@ -247,9 +243,7 @@
       font-size: 0.89rem;
     }
 
-    /* ==============================
-       SHARED SECTIONS
-    ============================== */
+    /* SHARED SECTIONS */
 
     section {
       padding: 105px 0;
@@ -289,16 +283,44 @@
     }
 
     .section-description {
-      max-width: 760px;
+      max-width: 780px;
       margin-top: 18px;
 
       color: var(--muted);
       font-size: 1.02rem;
     }
 
-    /* ==============================
-       IAM PROJECT LEDGER
-    ============================== */
+    /* AUTUMN SOLUTIONS */
+
+    .environment {
+      padding: 65px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-alt);
+    }
+
+    .environment-grid {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 42px;
+    }
+
+    .environment-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .environment-content h3 {
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    .environment-content p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* IAM PROJECT LEDGER */
 
     .project-ledger {
       border-top: 1px solid var(--line);
@@ -344,7 +366,6 @@
     .project-main p {
       max-width: 720px;
       margin-top: 11px;
-
       color: var(--muted);
     }
 
@@ -388,9 +409,7 @@
       font-size: 0.72rem;
     }
 
-    /* ==============================
-       GRC SECTION
-    ============================== */
+    /* GRC */
 
     .grc-section {
       background: var(--bg-alt);
@@ -409,13 +428,10 @@
 
     .grc-project {
       min-height: 270px;
-
       padding: 30px;
 
       border-right: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-
-      background: transparent;
 
       transition: background 150ms ease;
     }
@@ -448,7 +464,6 @@
 
     .grc-project p {
       margin-top: 13px;
-
       color: var(--muted);
       font-size: 0.92rem;
     }
@@ -469,9 +484,7 @@
       line-height: 1.75;
     }
 
-    /* ==============================
-       CAPABILITY MATRIX
-    ============================== */
+    /* CAPABILITIES */
 
     .capability-section {
       border-bottom: 1px solid var(--line);
@@ -512,14 +525,11 @@
 
     .capability p {
       margin-top: 10px;
-
       color: var(--muted);
       font-size: 0.86rem;
     }
 
-    /* ==============================
-       ABOUT
-    ============================== */
+    /* ABOUT */
 
     .about-grid {
       display: grid;
@@ -561,9 +571,7 @@
       font-size: 0.86rem;
     }
 
-    /* ==============================
-       FOOTER
-    ============================== */
+    /* FOOTER */
 
     footer {
       padding: 30px 0;
@@ -580,14 +588,13 @@
       gap: 20px;
     }
 
-    /* ==============================
-       RESPONSIVE
-    ============================== */
+    /* RESPONSIVE */
 
     @media (max-width: 900px) {
 
       .hero-grid,
-      .about-grid {
+      .about-grid,
+      .environment-content {
         grid-template-columns: 1fr;
       }
 
@@ -631,7 +638,8 @@
         padding: 75px 0;
       }
 
-      .section-header {
+      .section-header,
+      .environment-grid {
         grid-template-columns: 1fr;
         gap: 12px;
       }
@@ -659,774 +667,766 @@
       }
     }
 
-    @media (max-width: 520px) {
-
-      .nav-links li:first-child {
-        display: none;
-      }
-
-      h1 {
-        font-size: 3.1rem;
-      }
-    }
-
   </style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
+<nav>
+  <div class="container nav-inner">
 
-  <nav>
-    <div class="container nav-inner">
+    <a class="brand" href="#top">
+      BRENDEN DIGGS
+    </a>
 
-      <a class="brand" href="#top">
-        BRENDEN DIGGS
-      </a>
+    <ul class="nav-links">
+      <li><a href="#iam">IAM</a></li>
+      <li><a href="#grc">GRC</a></li>
+      <li><a href="#about">About</a></li>
 
-      <ul class="nav-links">
-        <li><a href="#iam">IAM</a></li>
-        <li><a href="#grc">GRC</a></li>
-        <li><a href="#about">About</a></li>
+      <li>
+        <a
+          href="https://github.com/brendendiggs"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </li>
+    </ul>
 
-        <li>
-          <a
-            href="https://github.com/brendendiggs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
+  </div>
+</nav>
+
+
+<main id="top">
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="container hero-grid">
+
+      <div>
+
+        <div class="eyebrow">
+          Identity Engineering / Cybersecurity / Governance
+        </div>
+
+        <h1>
+          Building security
+          <br>
+          around
+          <span class="hero-title-accent">identity.</span>
+        </h1>
+
+        <p class="hero-copy">
+          I build and evaluate security systems across identity engineering,
+          access governance, automation, cybersecurity risk, compliance, and
+          AI governance — connecting technical controls to the business
+          decisions they are designed to protect.
+        </p>
+
+        <div class="hero-actions">
+
+          <a class="button button-primary" href="#iam">
+            Explore IAM Work
           </a>
-        </li>
-      </ul>
+
+          <a class="button button-secondary" href="#grc">
+            Explore GRC Work
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <aside class="hero-rail">
+
+        <div class="hero-rail-item">
+          <div class="rail-label">Focus Areas</div>
+          <div class="rail-value">
+            Identity Engineering · GRC · AI Governance
+          </div>
+        </div>
+
+        <div class="hero-rail-item">
+          <div class="rail-label">Identity Platforms</div>
+          <div class="rail-value">
+            Microsoft Entra ID · PingID
+          </div>
+        </div>
+
+        <div class="hero-rail-item">
+          <div class="rail-label">Engineering</div>
+          <div class="rail-value">
+            Microsoft Graph · Node.js · Shell · Automation
+          </div>
+        </div>
+
+        <div class="hero-rail-item">
+          <div class="rail-label">Frameworks & Assurance</div>
+          <div class="rail-value">
+            NIST CSF · ISO 27001 · SOC 2 · NIST AI RMF
+          </div>
+        </div>
+
+      </aside>
 
     </div>
-  </nav>
+
+  </section>
 
 
-  <main id="top">
+  <!-- AUTUMN SOLUTIONS -->
 
+  <div class="environment">
 
-    <!-- HERO -->
+    <div class="container environment-grid">
 
-    <section class="hero">
+      <div class="section-code">
+        ENTERPRISE LAB
+      </div>
 
-      <div class="container hero-grid">
+      <div class="environment-content">
 
         <div>
-
-          <div class="eyebrow">
-            Identity Engineering / Cybersecurity
-          </div>
-
-          <h1>
-            Building security
-            <br>
-            around
-            <span class="hero-title-accent">identity.</span>
-          </h1>
-
-          <p class="hero-copy">
-            I design and build secure identity systems across access governance,
-            federation, lifecycle automation, Zero Trust, and identity security
-            — while connecting technical controls back to risk, governance,
-            and business requirements.
-          </p>
-
-          <div class="hero-actions">
-
-            <a class="button button-primary" href="#iam">
-              Explore IAM Work
-            </a>
-
-            <a class="button button-secondary" href="#grc">
-              View GRC Work
-            </a>
-
-          </div>
-
+          <h3>Autumn Solutions</h3>
         </div>
 
-
-        <aside class="hero-rail">
-
-          <div class="hero-rail-item">
-            <div class="rail-label">Primary Focus</div>
-            <div class="rail-value">
-              Identity & Access Management
-            </div>
-          </div>
-
-          <div class="hero-rail-item">
-            <div class="rail-label">Identity Platform</div>
-            <div class="rail-value">
-              Microsoft Entra ID
-            </div>
-          </div>
-
-          <div class="hero-rail-item">
-            <div class="rail-label">Engineering</div>
-            <div class="rail-value">
-              Microsoft Graph · Node.js · Automation
-            </div>
-          </div>
-
-          <div class="hero-rail-item">
-            <div class="rail-label">Governance</div>
-            <div class="rail-value">
-              IGA · GRC · AI Governance
-            </div>
-          </div>
-
-        </aside>
+        <p>
+          A fictional enterprise environment connecting the portfolio into one
+          security program. Identity engineering, risk management, compliance,
+          third-party risk, and AI governance projects are designed around the
+          same organization rather than isolated labs.
+        </p>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
 
 
+  <!-- IAM -->
 
-    <!-- IAM -->
+  <section id="iam">
 
-    <section id="iam">
+    <div class="container">
 
-      <div class="container">
+      <div class="section-header">
 
-        <div class="section-header">
-
-          <div class="section-code">
-            01 / IAM
-          </div>
-
-          <div>
-
-            <h2>
-              Identity engineering case studies.
-            </h2>
-
-            <p class="section-description">
-              Autumn Solutions is a fictional enterprise environment built to
-              demonstrate how identity security works across the complete access
-              lifecycle — authentication, federation, provisioning, governance,
-              review, and revocation.
-            </p>
-
-          </div>
-
+        <div class="section-code">
+          01 / IAM
         </div>
-
-
-        <div class="project-ledger">
-
-
-          <article class="project-row">
-
-            <div class="project-code">
-              IAM-01
-            </div>
-
-            <div class="project-main">
-
-              <h3>
-                Zero Trust Identity Security
-              </h3>
-
-              <p>
-                Designed workforce and privileged identity controls around
-                strong authentication, least privilege, identity risk,
-                Conditional Access, privileged access, and emergency access.
-              </p>
-
-              <span class="status complete">
-                ● Complete
-              </span>
-
-            </div>
-
-            <div class="stack">
-              <span>Conditional Access</span>
-              <span>MFA</span>
-              <span>PIM</span>
-              <span>Identity Protection</span>
-              <span>Emergency Access</span>
-            </div>
-
-          </article>
-
-
-
-          <article class="project-row">
-
-            <div class="project-code">
-              IAM-02
-            </div>
-
-            <div class="project-main">
-
-              <h3>
-                Enterprise SSO & Federation
-              </h3>
-
-              <p>
-                Implemented authentication and provisioning for a custom SaaS
-                platform using SAML, OpenID Connect, OAuth 2.0 Authorization
-                Code with PKCE, Microsoft Graph, and SCIM.
-              </p>
-
-              <span class="status complete">
-                ● Complete
-              </span>
-
-            </div>
-
-            <div class="stack">
-              <span>SAML 2.0</span>
-              <span>OIDC</span>
-              <span>OAuth 2.0 + PKCE</span>
-              <span>SCIM</span>
-              <span>Microsoft Graph</span>
-            </div>
-
-          </article>
-
-
-
-          <article class="project-row">
-
-            <div class="project-code">
-              IAM-03
-            </div>
-
-            <div class="project-main">
-
-              <h3>
-                Identity Lifecycle Automation
-              </h3>
-
-              <p>
-                Built a certificate-authenticated Joiner, Mover, Leaver workflow
-                driven by an HR source with automated Entra account creation,
-                group assignment, licensing, movement, disablement, and audit
-                logging.
-              </p>
-
-              <span class="status complete">
-                ● Complete
-              </span>
-
-            </div>
-
-            <div class="stack">
-              <span>JML</span>
-              <span>Node.js</span>
-              <span>Microsoft Graph</span>
-              <span>Certificate Auth</span>
-              <span>Audit Logging</span>
-            </div>
-
-          </article>
-
-
-
-          <article class="project-row">
-
-            <div class="project-code">
-              IAM-04
-            </div>
-
-            <div class="project-main">
-
-              <h3>
-                Governed Finance Access Lifecycle
-              </h3>
-
-              <p>
-                Designed governed, time-bound access to finance resources using
-                business justification, approval, entitlement provisioning,
-                expiration controls, recurring access reviews, and
-                governance-driven revocation.
-              </p>
-
-              <span class="status progress">
-                ● In Progress
-              </span>
-
-            </div>
-
-            <div class="stack">
-              <span>Entitlement Management</span>
-              <span>Access Packages</span>
-              <span>Approvals</span>
-              <span>Access Reviews</span>
-              <span>IGA</span>
-            </div>
-
-          </article>
-
-
-
-          <article class="project-row">
-
-            <div class="project-code">
-              IAM-05
-            </div>
-
-            <div class="project-main">
-
-              <h3>
-                Identity Threat & Workload Security
-              </h3>
-
-              <p>
-                Extending the identity program into workload identities,
-                non-human access, identity threat detection, and security
-                engineering.
-              </p>
-
-              <span class="status progress">
-                ● Next
-              </span>
-
-            </div>
-
-            <div class="stack">
-              <span>Workload Identity</span>
-              <span>Identity Threats</span>
-              <span>Microsoft Entra</span>
-              <span>Security Engineering</span>
-            </div>
-
-          </article>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- GRC -->
-
-    <section id="grc" class="grc-section">
-
-      <div class="container">
-
-        <div class="section-header">
-
-          <div class="section-code">
-            02 / GRC
-          </div>
-
-          <div>
-
-            <h2>
-              Governance, risk & AI governance.
-            </h2>
-
-            <p class="section-description">
-              Applied security governance work focused on assessing risk,
-              strengthening controls, supporting assurance, and helping
-              organizations make secure, well-governed technology decisions.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="grc-grid">
-
-
-          <article class="grc-project">
-
-            <div class="grc-category">
-              Risk Management
-            </div>
-
-            <h3>
-              NIST CSF & ISO 27001 Risk Assessment and Risk Register
-            </h3>
-
-            <p>
-              Built a cybersecurity risk assessment package covering asset
-              inventory, risk scoring, control mapping, treatment planning,
-              and remediation tracking.
-            </p>
-
-            <div class="grc-focus">
-              NIST CSF · ISO 27001 · Risk Register · Control Mapping
-            </div>
-
-          </article>
-
-
-
-          <article class="grc-project">
-
-            <div class="grc-category">
-              AI Governance
-            </div>
-
-            <h3>
-              AI Governance Program and AI Risk Register
-            </h3>
-
-            <p>
-              Built an AI governance program covering AI use-case intake,
-              system inventory, risk classification, acceptable-use guidance,
-              governance workflows, and AI risk treatment.
-            </p>
-
-            <div class="grc-focus">
-              AI Risk · Governance Workflows · NIST AI RMF
-            </div>
-
-          </article>
-
-
-
-          <article class="grc-project">
-
-            <div class="grc-category">
-              Audit Readiness
-            </div>
-
-            <h3>
-              SOC 2 & ISO 27001 Audit Readiness
-            </h3>
-
-            <p>
-              Created an audit-readiness package covering control
-              documentation, evidence collection, access reviews, control
-              testing, audit tracking, and remediation planning.
-            </p>
-
-            <div class="grc-focus">
-              SOC 2 · ISO 27001 · Evidence · Control Testing
-            </div>
-
-          </article>
-
-
-
-          <article class="grc-project">
-
-            <div class="grc-category">
-              AI Assurance
-            </div>
-
-            <h3>
-              ISO 42001 AI Management System Audit Readiness
-            </h3>
-
-            <p>
-              Created an AI governance audit-readiness package aligned to
-              ISO 42001, including policy documentation, AI impact assessment,
-              evidence tracking, control testing, and management review support.
-            </p>
-
-            <div class="grc-focus">
-              ISO 42001 · AI Impact Assessment · Audit Evidence
-            </div>
-
-          </article>
-
-
-
-          <article class="grc-project">
-
-            <div class="grc-category">
-              Third-Party Risk
-            </div>
-
-            <h3>
-              Third-Party Risk Management Program
-            </h3>
-
-            <p>
-              Designed a vendor risk management process covering onboarding,
-              due diligence, SOC 2 review, vendor tiering, contract
-              requirements, scoring, remediation tracking, and recurring
-              risk decisions.
-            </p>
-
-            <div class="grc-focus">
-              TPRM · Vendor Risk · SOC 2 Review · Due Diligence
-            </div>
-
-          </article>
-
-
-
-          <article class="grc-project">
-
-            <div class="grc-category">
-              AI Third-Party Risk
-            </div>
-
-            <h3>
-              Third-Party AI Risk & Vendor Governance
-            </h3>
-
-            <p>
-              Built a governance process for AI-enabled vendors covering
-              AI vendor intake, data-use review, contract control tracking,
-              vendor risk scoring, exception management, and high-risk
-              AI monitoring.
-            </p>
-
-            <div class="grc-focus">
-              AI Vendors · Data Use · Risk Scoring · Exceptions
-            </div>
-
-          </article>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- CAPABILITIES -->
-
-    <section class="capability-section">
-
-      <div class="container">
-
-        <div class="section-header">
-
-          <div class="section-code">
-            03 / CAPABILITIES
-          </div>
-
-          <div>
-
-            <h2>
-              Technical and governance depth.
-            </h2>
-
-            <p class="section-description">
-              The portfolio spans hands-on identity engineering, security
-              governance, automation, assurance, and risk management.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="capability-grid">
-
-
-          <div class="capability">
-
-            <div class="capability-number">
-              01
-            </div>
-
-            <h3>
-              Identity Engineering
-            </h3>
-
-            <p>
-              Microsoft Entra ID, Conditional Access, PIM, Identity Protection,
-              Entitlement Management, SAML, OIDC, OAuth 2.0, SCIM, and
-              Microsoft Graph.
-            </p>
-
-          </div>
-
-
-
-          <div class="capability">
-
-            <div class="capability-number">
-              02
-            </div>
-
-            <h3>
-              Identity Automation
-            </h3>
-
-            <p>
-              Joiner-Mover-Leaver automation, Node.js, shell,
-              certificate-based authentication, lifecycle orchestration,
-              licensing, group management, and audit logging.
-            </p>
-
-          </div>
-
-
-
-          <div class="capability">
-
-            <div class="capability-number">
-              03
-            </div>
-
-            <h3>
-              Governance, Risk & Compliance
-            </h3>
-
-            <p>
-              Risk assessments, risk registers, control mapping,
-              audit readiness, evidence collection, control testing,
-              remediation planning, and exception management.
-            </p>
-
-          </div>
-
-
-
-          <div class="capability">
-
-            <div class="capability-number">
-              04
-            </div>
-
-            <h3>
-              Frameworks & Standards
-            </h3>
-
-            <p>
-              NIST CSF, NIST RMF, ISO 27001, SOC 2, CIS Controls,
-              NIST SP 800-53, NIST AI RMF, ISO 42001, and related
-              security governance frameworks.
-            </p>
-
-          </div>
-
-
-
-          <div class="capability">
-
-            <div class="capability-number">
-              05
-            </div>
-
-            <h3>
-              Third-Party Risk
-            </h3>
-
-            <p>
-              Vendor onboarding, due diligence, SOC 2 review, risk tiering,
-              contract requirements, remediation tracking, vendor governance,
-              and AI third-party risk.
-            </p>
-
-          </div>
-
-
-
-          <div class="capability">
-
-            <div class="capability-number">
-              06
-            </div>
-
-            <h3>
-              AI Governance
-            </h3>
-
-            <p>
-              AI use-case intake, AI inventories, risk classification,
-              impact assessment, acceptable-use governance, vendor review,
-              ISO 42001 readiness, and AI risk monitoring.
-            </p>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ABOUT -->
-
-    <section id="about">
-
-      <div class="container about-grid">
-
 
         <div>
-
-          <div class="section-code">
-            04 / ABOUT
-          </div>
 
           <h2>
-            Engineering access.
-            Governing risk.
+            Identity engineering case studies.
           </h2>
+
+          <p class="section-description">
+            The Autumn Solutions identity program demonstrates how enterprise
+            access is secured across the complete lifecycle — authentication,
+            federation, provisioning, privileged access, governance, review,
+            and revocation.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-ledger">
+
+
+        <article class="project-row">
+
+          <div class="project-code">
+            IAM-01
+          </div>
+
+          <div class="project-main">
+
+            <h3>
+              Zero Trust Identity Security
+            </h3>
+
+            <p>
+              Designed workforce and privileged identity controls around
+              strong authentication, least privilege, identity risk,
+              Conditional Access, privileged access, and emergency access.
+            </p>
+
+            <span class="status complete">
+              ● Complete
+            </span>
+
+          </div>
+
+          <div class="stack">
+            <span>Conditional Access</span>
+            <span>MFA</span>
+            <span>PIM</span>
+            <span>Identity Protection</span>
+            <span>Emergency Access</span>
+          </div>
+
+        </article>
+
+
+        <article class="project-row">
+
+          <div class="project-code">
+            IAM-02
+          </div>
+
+          <div class="project-main">
+
+            <h3>
+              Enterprise SSO & Federation
+            </h3>
+
+            <p>
+              Implemented authentication and provisioning for a custom SaaS
+              platform using SAML, OpenID Connect, OAuth 2.0 Authorization
+              Code with PKCE, Microsoft Graph, and SCIM.
+            </p>
+
+            <span class="status complete">
+              ● Complete
+            </span>
+
+          </div>
+
+          <div class="stack">
+            <span>SAML 2.0</span>
+            <span>OIDC</span>
+            <span>OAuth 2.0 + PKCE</span>
+            <span>SCIM</span>
+            <span>Microsoft Graph</span>
+          </div>
+
+        </article>
+
+
+        <article class="project-row">
+
+          <div class="project-code">
+            IAM-03
+          </div>
+
+          <div class="project-main">
+
+            <h3>
+              Identity Lifecycle Automation
+            </h3>
+
+            <p>
+              Built a certificate-authenticated Joiner, Mover, Leaver workflow
+              driven by an HR source with automated Entra account creation,
+              group assignment, licensing, movement, disablement, and
+              structured audit logging.
+            </p>
+
+            <span class="status complete">
+              ● Complete
+            </span>
+
+          </div>
+
+          <div class="stack">
+            <span>JML</span>
+            <span>Node.js</span>
+            <span>Microsoft Graph</span>
+            <span>Certificate Auth</span>
+            <span>Audit Logging</span>
+          </div>
+
+        </article>
+
+
+        <article class="project-row">
+
+          <div class="project-code">
+            IAM-04
+          </div>
+
+          <div class="project-main">
+
+            <h3>
+              Governed Finance Access Lifecycle
+            </h3>
+
+            <p>
+              Designed governed, time-bound access to finance resources using
+              business justification, approval, entitlement provisioning,
+              expiration controls, recurring access reviews, and
+              governance-driven revocation.
+            </p>
+
+            <span class="status progress">
+              ● In Progress
+            </span>
+
+          </div>
+
+          <div class="stack">
+            <span>Entitlement Management</span>
+            <span>Access Packages</span>
+            <span>Approvals</span>
+            <span>Access Reviews</span>
+            <span>IGA</span>
+          </div>
+
+        </article>
+
+
+        <article class="project-row">
+
+          <div class="project-code">
+            IAM-05
+          </div>
+
+          <div class="project-main">
+
+            <h3>
+              Identity Threat & Workload Security
+            </h3>
+
+            <p>
+              Extending the Autumn Solutions identity program into workload
+              identities, non-human access, identity threat detection,
+              workload credential risk, and security engineering.
+            </p>
+
+            <span class="status progress">
+              ● Next
+            </span>
+
+          </div>
+
+          <div class="stack">
+            <span>Workload Identity</span>
+            <span>Identity Threats</span>
+            <span>Microsoft Graph</span>
+            <span>Security Engineering</span>
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GRC -->
+
+  <section id="grc" class="grc-section">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <div class="section-code">
+          02 / GRC
+        </div>
+
+        <div>
+
+          <h2>
+            Governance, risk & AI governance.
+          </h2>
+
+          <p class="section-description">
+            The Autumn Solutions governance program extends the same enterprise
+            environment into cybersecurity risk, compliance, audit readiness,
+            third-party risk, and AI governance — demonstrating how technical
+            controls connect to organizational risk and assurance.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="grc-grid">
+
+
+        <article class="grc-project">
+
+          <div class="grc-category">
+            Risk Management
+          </div>
+
+          <h3>
+            NIST CSF & ISO 27001 Risk Assessment and Risk Register
+          </h3>
+
+          <p>
+            Built an enterprise cybersecurity risk assessment covering asset
+            inventory, risk scoring, control mapping, treatment planning,
+            remediation tracking, and risk ownership.
+          </p>
+
+          <div class="grc-focus">
+            NIST CSF · ISO 27001 · Risk Register · Control Mapping
+          </div>
+
+        </article>
+
+
+        <article class="grc-project">
+
+          <div class="grc-category">
+            AI Governance
+          </div>
+
+          <h3>
+            AI Governance Program and AI Risk Register
+          </h3>
+
+          <p>
+            Designed governance around enterprise AI use cases including
+            intake, system inventory, risk classification, acceptable-use
+            guidance, governance workflows, and AI risk treatment.
+          </p>
+
+          <div class="grc-focus">
+            NIST AI RMF · AI Risk · Governance Workflows
+          </div>
+
+        </article>
+
+
+        <article class="grc-project">
+
+          <div class="grc-category">
+            Audit & Assurance
+          </div>
+
+          <h3>
+            SOC 2 & ISO 27001 Audit Readiness
+          </h3>
+
+          <p>
+            Developed an audit-readiness program covering control
+            documentation, evidence collection, access reviews, control
+            testing, audit tracking, and remediation planning.
+          </p>
+
+          <div class="grc-focus">
+            SOC 2 · ISO 27001 · Evidence · Control Testing
+          </div>
+
+        </article>
+
+
+        <article class="grc-project">
+
+          <div class="grc-category">
+            AI Assurance
+          </div>
+
+          <h3>
+            ISO 42001 AI Management System Audit Readiness
+          </h3>
+
+          <p>
+            Built an AI management-system readiness package including policy
+            documentation, AI impact assessments, evidence tracking, control
+            testing, and management review support.
+          </p>
+
+          <div class="grc-focus">
+            ISO 42001 · AI Impact Assessment · Audit Evidence
+          </div>
+
+        </article>
+
+
+        <article class="grc-project">
+
+          <div class="grc-category">
+            Third-Party Risk
+          </div>
+
+          <h3>
+            Third-Party Risk Management Program
+          </h3>
+
+          <p>
+            Designed an enterprise vendor governance process covering
+            onboarding, due diligence, SOC 2 review, vendor tiering,
+            contractual requirements, scoring, and remediation.
+          </p>
+
+          <div class="grc-focus">
+            TPRM · Vendor Risk · SOC 2 Review · Due Diligence
+          </div>
+
+        </article>
+
+
+        <article class="grc-project">
+
+          <div class="grc-category">
+            AI Third-Party Risk
+          </div>
+
+          <h3>
+            Third-Party AI Risk & Vendor Governance
+          </h3>
+
+          <p>
+            Created governance for AI-enabled vendors covering intake,
+            data-use review, contractual controls, vendor risk scoring,
+            exception management, and monitoring of higher-risk AI services.
+          </p>
+
+          <div class="grc-focus">
+            AI Vendors · Data Use · Risk Scoring · Exceptions
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CAPABILITIES -->
+
+  <section class="capability-section">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <div class="section-code">
+          03 / CAPABILITIES
+        </div>
+
+        <div>
+
+          <h2>
+            Technical and governance depth.
+          </h2>
+
+          <p class="section-description">
+            The portfolio combines hands-on identity engineering with security
+            governance, automation, risk management, assurance, and
+            AI governance.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="capability-grid">
+
+
+        <div class="capability">
+
+          <div class="capability-number">01</div>
+
+          <h3>Identity Engineering</h3>
+
+          <p>
+            Microsoft Entra ID, PingID, Conditional Access, PIM,
+            Identity Protection, Entitlement Management, SAML, OIDC,
+            OAuth 2.0, SCIM, and Microsoft Graph.
+          </p>
 
         </div>
 
 
-        <div class="about-copy">
+        <div class="capability">
+
+          <div class="capability-number">02</div>
+
+          <h3>Engineering & Automation</h3>
 
           <p>
-            I work at the intersection of identity engineering,
-            cybersecurity, governance, and automation.
+            Microsoft Graph, Node.js, shell, certificate-based authentication,
+            lifecycle orchestration, API integration, group management,
+            licensing, and audit logging.
           </p>
+
+        </div>
+
+
+        <div class="capability">
+
+          <div class="capability-number">03</div>
+
+          <h3>Governance, Risk & Compliance</h3>
 
           <p>
-            My IAM work focuses on complete identity lifecycles — how access
-            is authenticated, requested, approved, provisioned, reviewed,
-            and removed. My governance work connects those technical controls
-            back to organizational risk, assurance, compliance, and
-            decision-making.
+            Risk assessments, risk registers, control mapping, audit
+            readiness, evidence collection, control testing, remediation,
+            and exception management.
           </p>
+
+        </div>
+
+
+        <div class="capability">
+
+          <div class="capability-number">04</div>
+
+          <h3>Frameworks & Assurance</h3>
 
           <p>
-            The goal of this portfolio is not simply to show product
-            configuration. It is to document how security systems are designed,
-            why controls exist, how they behave, and what happens when
-            something changes.
+            NIST CSF, ISO 27001, SOC 2, CIS Controls, NIST SP 800-53,
+            NIST AI RMF, ISO 42001, and related governance and assurance
+            practices.
           </p>
 
+        </div>
 
-          <div class="principles">
 
-            <div class="principle">
-              <strong>Identity</strong>
-              <span>
-                Secure access across people, applications, privileges,
-                and workloads.
-              </span>
-            </div>
+        <div class="capability">
 
-            <div class="principle">
-              <strong>Automation</strong>
-              <span>
-                Reduce manual access administration and enforce repeatable
-                lifecycle decisions.
-              </span>
-            </div>
+          <div class="capability-number">05</div>
 
-            <div class="principle">
-              <strong>Governance</strong>
-              <span>
-                Ensure access and technology decisions remain justified,
-                reviewable, and accountable.
-              </span>
-            </div>
+          <h3>Third-Party Risk</h3>
 
-            <div class="principle">
-              <strong>Risk</strong>
-              <span>
-                Connect technical controls to business impact,
-                assurance, and remediation.
-              </span>
-            </div>
+          <p>
+            Vendor onboarding, due diligence, SOC 2 review, risk tiering,
+            contract requirements, remediation tracking, vendor governance,
+            and AI third-party risk.
+          </p>
+
+        </div>
+
+
+        <div class="capability">
+
+          <div class="capability-number">06</div>
+
+          <h3>AI Governance</h3>
+
+          <p>
+            AI use-case intake, inventories, risk classification, impact
+            assessment, acceptable-use governance, vendor review,
+            ISO 42001 readiness, and AI risk monitoring.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="container about-grid">
+
+
+      <div>
+
+        <div class="section-code">
+          04 / ABOUT
+        </div>
+
+        <h2>
+          Engineering access.
+          Governing risk.
+        </h2>
+
+      </div>
+
+
+      <div class="about-copy">
+
+        <p>
+          I work across identity engineering, cybersecurity, governance,
+          and automation.
+        </p>
+
+        <p>
+          My identity work focuses on complete access lifecycles — how
+          identities authenticate, request access, receive authorization,
+          move through the organization, undergo review, and ultimately
+          lose access when it is no longer justified.
+        </p>
+
+        <p>
+          My GRC and AI governance work evaluates those systems from another
+          perspective: risk, control effectiveness, assurance, third-party
+          exposure, compliance, and responsible technology governance.
+        </p>
+
+        <p>
+          Together, the Autumn Solutions projects model how technical
+          engineering and security governance operate inside the same
+          enterprise rather than as separate disciplines.
+        </p>
+
+
+        <div class="principles">
+
+          <div class="principle">
+
+            <strong>Identity</strong>
+
+            <span>
+              Secure access across people, applications, privileges,
+              and workloads.
+            </span>
+
+          </div>
+
+
+          <div class="principle">
+
+            <strong>Engineering</strong>
+
+            <span>
+              Automate identity operations and integrate security systems
+              using APIs and repeatable workflows.
+            </span>
+
+          </div>
+
+
+          <div class="principle">
+
+            <strong>Governance</strong>
+
+            <span>
+              Ensure access and technology decisions remain justified,
+              reviewable, and accountable.
+            </span>
+
+          </div>
+
+
+          <div class="principle">
+
+            <strong>Risk</strong>
+
+            <span>
+              Connect technical controls to business impact, assurance,
+              compliance, and remediation.
+            </span>
 
           </div>
 
@@ -1434,35 +1434,35 @@
 
       </div>
 
-    </section>
-
-
-  </main>
-
-
-
-  <footer>
-
-    <div class="container footer-inner">
-
-      <span>
-        © <span id="year"></span> Brenden Diggs
-      </span>
-
-      <span>
-        IAM · Cybersecurity · GRC · AI Governance
-      </span>
-
     </div>
 
-  </footer>
+  </section>
 
 
+</main>
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <span>
+      © <span id="year"></span> Brenden Diggs
+    </span>
+
+    <span>
+      IAM · Cybersecurity · GRC · AI Governance
+    </span>
+
+  </div>
+
+</footer>
+
+
+<script>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
 
 </body>
 </html>
