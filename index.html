@@ -17,7 +17,6 @@
       --bg-soft: #12161b;
       --panel: #161b21;
       --panel-warm: #1b1916;
-      --panel-light: #1c2229;
 
       --text: #f2eee7;
       --text-soft: #d4cec4;
@@ -28,11 +27,11 @@
       --gold-light: #efcf88;
       --gold-dark: #9c7433;
 
-      --copper: #b96f3d;
-      --copper-light: #d89664;
+      --copper: #c47a46;
+      --copper-light: #dda06f;
 
-      --green: #79b995;
-      --amber: #d2ae5c;
+      --bronze: #a58a62;
+      --bronze-light: #c1ab88;
 
       --border: #37322c;
       --border-soft: #292722;
@@ -86,6 +85,7 @@
 
       background: rgba(13, 16, 20, 0.96);
       border-bottom: 1px solid var(--border);
+
       backdrop-filter: blur(14px);
     }
 
@@ -118,6 +118,7 @@
       list-style: none;
 
       color: var(--text-soft);
+
       font-size: 0.95rem;
       font-weight: 550;
     }
@@ -135,13 +136,13 @@
     .hero {
       padding: 108px 0 88px;
 
-      background: var(--bg);
       border-bottom: 1px solid var(--border);
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.12fr 0.88fr;
+
       gap: 86px;
       align-items: center;
     }
@@ -235,6 +236,7 @@
 
     .summary-item {
       padding: 22px 0;
+
       border-bottom: 1px solid var(--border-soft);
     }
 
@@ -273,6 +275,7 @@
     .enterprise-grid {
       display: grid;
       grid-template-columns: 190px 1fr;
+
       gap: 50px;
       align-items: start;
     }
@@ -289,6 +292,7 @@
     .enterprise-content {
       display: grid;
       grid-template-columns: 0.68fr 1.32fr;
+
       gap: 65px;
       align-items: start;
     }
@@ -320,6 +324,7 @@
     .section-header {
       display: grid;
       grid-template-columns: 190px 1fr;
+
       gap: 50px;
 
       margin-bottom: 67px;
@@ -346,7 +351,7 @@
       line-height: 1.8;
     }
 
-    /* IAM PROJECTS */
+    /* PROJECTS */
 
     .project-list {
       border-top: 1px solid var(--border-gold);
@@ -355,6 +360,7 @@
     .project {
       display: grid;
       grid-template-columns: 110px 1fr;
+
       gap: 45px;
 
       padding: 58px 0;
@@ -373,6 +379,15 @@
 
     .project-body {
       max-width: 970px;
+    }
+
+    .project-category {
+      margin-bottom: 8px;
+
+      color: var(--gold);
+
+      font-size: 1rem;
+      font-weight: 700;
     }
 
     .project-heading {
@@ -399,22 +414,26 @@
 
       padding: 7px 11px;
 
-      border: 1px solid var(--border);
-
       font-size: 0.84rem;
       font-weight: 750;
     }
 
-    .complete {
-      color: #a6dabd;
-      background: #14241c;
-      border-color: #315943;
+    .status-complete {
+      color: var(--gold-light);
+      background: #241e13;
+      border: 1px solid #6d5830;
     }
 
-    .progress {
-      color: var(--gold-light);
-      background: #282015;
-      border-color: #6c542e;
+    .status-progress {
+      color: var(--copper-light);
+      background: #251a14;
+      border: 1px solid #70452e;
+    }
+
+    .status-planned {
+      color: var(--bronze-light);
+      background: #1e1b17;
+      border: 1px solid #514638;
     }
 
     .project-description {
@@ -440,6 +459,7 @@
     .skill-list {
       display: flex;
       flex-wrap: wrap;
+
       gap: 10px;
     }
 
@@ -476,69 +496,6 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .grc-list {
-      border-top: 1px solid var(--border-gold);
-    }
-
-    .grc-project {
-      display: grid;
-      grid-template-columns: 205px 1fr;
-      gap: 48px;
-
-      padding: 54px 0;
-
-      border-bottom: 1px solid var(--border);
-    }
-
-    .grc-category {
-      padding-top: 8px;
-
-      color: var(--copper-light);
-
-      font-size: 1.02rem;
-      font-weight: 750;
-    }
-
-    .grc-body {
-      max-width: 950px;
-    }
-
-    .grc-body h3 {
-      max-width: 850px;
-
-      color: var(--text);
-
-      font-size: clamp(1.82rem, 2.8vw, 2.22rem);
-      line-height: 1.25;
-      letter-spacing: -0.028em;
-      font-weight: 690;
-    }
-
-    .grc-description {
-      max-width: 820px;
-      margin-top: 16px;
-
-      color: var(--muted);
-
-      font-size: 1.06rem;
-      line-height: 1.8;
-    }
-
-    .grc-project .skill-heading {
-      color: var(--copper-light);
-    }
-
-    .grc-project .skill-list span {
-      border-color: #5c4030;
-      background: #1c1714;
-    }
-
-    .grc-project .skill-list span:hover {
-      color: #efb98f;
-      border-color: var(--copper);
-      background: #251a15;
-    }
-
     /* CAPABILITIES */
 
     .capability-section {
@@ -547,15 +504,15 @@
 
     .capability-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
 
       border-top: 1px solid var(--border-gold);
       border-left: 1px solid var(--border);
     }
 
     .capability {
-      min-height: 280px;
-      padding: 39px;
+      min-height: 290px;
+      padding: 38px;
 
       background: var(--panel);
 
@@ -563,26 +520,21 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .capability:nth-child(2),
-    .capability:nth-child(5) {
-      background: var(--panel-warm);
-    }
-
     .capability h3 {
       color: var(--gold-light);
 
-      font-size: 1.5rem;
+      font-size: 1.48rem;
       line-height: 1.25;
       letter-spacing: -0.025em;
       font-weight: 690;
     }
 
     .capability p {
-      margin-top: 16px;
+      margin-top: 17px;
 
       color: var(--text-soft);
 
-      font-size: 1.04rem;
+      font-size: 1.02rem;
       line-height: 1.78;
     }
 
@@ -590,12 +542,14 @@
 
     .about-section {
       background: var(--bg-soft);
+
       border-top: 1px solid var(--border);
     }
 
     .about-grid {
       display: grid;
       grid-template-columns: 0.78fr 1.22fr;
+
       gap: 90px;
     }
 
@@ -632,6 +586,7 @@
     .principle {
       display: grid;
       grid-template-columns: 150px 1fr;
+
       gap: 24px;
 
       padding: 21px 0;
@@ -641,11 +596,13 @@
 
     .principle strong {
       color: var(--gold-light);
+
       font-size: 1rem;
     }
 
     .principle span {
       color: var(--text-soft);
+
       font-size: 0.98rem;
     }
 
@@ -663,12 +620,19 @@
     .footer-inner {
       display: flex;
       justify-content: space-between;
+
       gap: 24px;
 
       font-size: 0.88rem;
     }
 
     /* RESPONSIVE */
+
+    @media (max-width: 1000px) {
+      .capability-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
     @media (max-width: 920px) {
       .hero-grid,
@@ -685,15 +649,12 @@
         flex-direction: column;
         gap: 10px;
       }
-
-      .grc-project {
-        grid-template-columns: 165px 1fr;
-      }
     }
 
     @media (max-width: 720px) {
       .nav-links {
         gap: 16px;
+
         font-size: 0.8rem;
       }
 
@@ -711,9 +672,9 @@
 
       .section-header,
       .enterprise-grid,
-      .project,
-      .grc-project {
+      .project {
         grid-template-columns: 1fr;
+
         gap: 16px;
       }
 
@@ -723,6 +684,7 @@
 
       .principle {
         grid-template-columns: 1fr;
+
         gap: 5px;
       }
 
@@ -982,8 +944,6 @@
         <div class="project-list">
 
 
-          <!-- IAM 01 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1000,7 +960,7 @@
                   Zero Trust Identity Security
                 </h3>
 
-                <span class="status complete">
+                <span class="status status-complete">
                   Complete
                 </span>
 
@@ -1036,8 +996,6 @@
 
 
 
-          <!-- IAM 02 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1054,7 +1012,7 @@
                   Enterprise SSO & Federation
                 </h3>
 
-                <span class="status complete">
+                <span class="status status-complete">
                   Complete
                 </span>
 
@@ -1089,8 +1047,6 @@
 
 
 
-          <!-- IAM 03 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1107,7 +1063,7 @@
                   Identity Lifecycle Automation
                 </h3>
 
-                <span class="status complete">
+                <span class="status status-complete">
                   Complete
                 </span>
 
@@ -1143,8 +1099,6 @@
 
 
 
-          <!-- IAM 04 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1161,7 +1115,7 @@
                   Governed Finance Access Lifecycle
                 </h3>
 
-                <span class="status progress">
+                <span class="status status-progress">
                   In Progress
                 </span>
 
@@ -1197,8 +1151,6 @@
 
 
 
-          <!-- IAM 05 -->
-
           <article class="project">
 
             <div class="project-id">
@@ -1215,7 +1167,7 @@
                   Identity Threat & Workload Security
                 </h3>
 
-                <span class="status progress">
+                <span class="status status-planned">
                   Planned
                 </span>
 
@@ -1292,25 +1244,33 @@
 
 
 
-        <div class="grc-list">
+        <div class="project-list">
 
 
-          <!-- GRC 01 -->
+          <article class="project">
 
-          <article class="grc-project">
-
-            <div class="grc-category">
-              Risk Management
+            <div class="project-id">
+              GRC-01
             </div>
 
 
-            <div class="grc-body">
+            <div class="project-body">
 
-              <h3>
-                NIST CSF & ISO 27001 Risk Assessment and Risk Register
-              </h3>
 
-              <p class="grc-description">
+              <div class="project-category">
+                Risk Management
+              </div>
+
+              <div class="project-heading">
+
+                <h3>
+                  NIST CSF & ISO 27001 Risk Assessment and Risk Register
+                </h3>
+
+              </div>
+
+
+              <p class="project-description">
                 Built an enterprise cybersecurity risk assessment covering
                 asset inventory, risk scoring, control mapping, treatment
                 planning, remediation tracking, and risk ownership.
@@ -1338,22 +1298,30 @@
 
 
 
-          <!-- GRC 02 -->
+          <article class="project">
 
-          <article class="grc-project">
-
-            <div class="grc-category">
-              AI Governance
+            <div class="project-id">
+              GRC-02
             </div>
 
 
-            <div class="grc-body">
+            <div class="project-body">
 
-              <h3>
-                AI Governance Program and AI Risk Register
-              </h3>
 
-              <p class="grc-description">
+              <div class="project-category">
+                AI Governance
+              </div>
+
+              <div class="project-heading">
+
+                <h3>
+                  AI Governance Program and AI Risk Register
+                </h3>
+
+              </div>
+
+
+              <p class="project-description">
                 Designed governance for enterprise AI use cases including
                 intake, system inventory, risk classification, acceptable-use
                 guidance, governance workflows, and AI risk treatment.
@@ -1381,22 +1349,30 @@
 
 
 
-          <!-- GRC 03 -->
+          <article class="project">
 
-          <article class="grc-project">
-
-            <div class="grc-category">
-              Audit & Assurance
+            <div class="project-id">
+              GRC-03
             </div>
 
 
-            <div class="grc-body">
+            <div class="project-body">
 
-              <h3>
-                SOC 2 & ISO 27001 Audit Readiness
-              </h3>
 
-              <p class="grc-description">
+              <div class="project-category">
+                Audit & Assurance
+              </div>
+
+              <div class="project-heading">
+
+                <h3>
+                  SOC 2 & ISO 27001 Audit Readiness
+                </h3>
+
+              </div>
+
+
+              <p class="project-description">
                 Developed an audit-readiness program covering control
                 documentation, evidence collection, access reviews,
                 control testing, audit tracking, and remediation planning.
@@ -1424,22 +1400,30 @@
 
 
 
-          <!-- GRC 04 -->
+          <article class="project">
 
-          <article class="grc-project">
-
-            <div class="grc-category">
-              AI Assurance
+            <div class="project-id">
+              GRC-04
             </div>
 
 
-            <div class="grc-body">
+            <div class="project-body">
 
-              <h3>
-                ISO 42001 AI Management System Audit Readiness
-              </h3>
 
-              <p class="grc-description">
+              <div class="project-category">
+                AI Assurance
+              </div>
+
+              <div class="project-heading">
+
+                <h3>
+                  ISO 42001 AI Management System Audit Readiness
+                </h3>
+
+              </div>
+
+
+              <p class="project-description">
                 Built an AI management-system readiness package including
                 policy documentation, AI impact assessments, evidence
                 tracking, control testing, and management review support.
@@ -1467,22 +1451,30 @@
 
 
 
-          <!-- GRC 05 -->
+          <article class="project">
 
-          <article class="grc-project">
-
-            <div class="grc-category">
-              Third-Party Risk
+            <div class="project-id">
+              GRC-05
             </div>
 
 
-            <div class="grc-body">
+            <div class="project-body">
 
-              <h3>
-                Third-Party Risk Management Program
-              </h3>
 
-              <p class="grc-description">
+              <div class="project-category">
+                Third-Party Risk
+              </div>
+
+              <div class="project-heading">
+
+                <h3>
+                  Third-Party Risk Management Program
+                </h3>
+
+              </div>
+
+
+              <p class="project-description">
                 Designed enterprise vendor governance covering onboarding,
                 due diligence, SOC 2 review, vendor tiering, contractual
                 requirements, risk scoring, and remediation tracking.
@@ -1510,22 +1502,30 @@
 
 
 
-          <!-- GRC 06 -->
+          <article class="project">
 
-          <article class="grc-project">
-
-            <div class="grc-category">
-              AI Third-Party Risk
+            <div class="project-id">
+              GRC-06
             </div>
 
 
-            <div class="grc-body">
+            <div class="project-body">
 
-              <h3>
-                Third-Party AI Risk & Vendor Governance
-              </h3>
 
-              <p class="grc-description">
+              <div class="project-category">
+                AI Third-Party Risk
+              </div>
+
+              <div class="project-heading">
+
+                <h3>
+                  Third-Party AI Risk & Vendor Governance
+                </h3>
+
+              </div>
+
+
+              <p class="project-description">
                 Created governance for AI-enabled vendors covering intake,
                 data-use review, contractual controls, vendor risk scoring,
                 exception management, and higher-risk AI monitoring.
