@@ -1,0 +1,140 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 960 740"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">IAM-05 Workload Identity Assessment Architecture</title>
+  <desc id="desc">
+    Read-only delegated Microsoft Graph assessment followed by a separate
+    administrator remediation and reassessment cycle.
+  </desc>
+
+  <style>
+    .bg { fill: #161b21; }
+    .panel { fill: #12161b; stroke: #655236; stroke-width: 1; }
+    .node { fill: #1b1916; stroke: #9c7433; stroke-width: 1.2; }
+    .title { fill: #efcf88; font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+    .label { fill: #f2eee7; font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+    .sub { fill: #a89f92; font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+    .arrow { stroke: #d4aa55; stroke-width: 2.5; fill: none; }
+    .note { fill: #a89f92; font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .note-line { stroke: #9c7433; stroke-width: 3; }
+  </style>
+
+  <defs>
+    <marker
+      id="arrowhead"
+      markerWidth="8"
+      markerHeight="8"
+      refX="6"
+      refY="3"
+      orient="auto"
+    >
+      <path d="M0,0 L0,6 L6,3 z" fill="#d4aa55"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="740"/>
+
+  <!-- LEFT: AUTHENTICATION / DISCOVERY -->
+  <rect class="panel" x="35" y="30" width="425" height="680" rx="2"/>
+  <text class="title" x="247.5" y="66">READ-ONLY ASSESSMENT PATH</text>
+
+  <rect class="node" x="85" y="95" width="325" height="88"/>
+  <text class="label" x="247.5" y="130">
+    <tspan x="247.5">IAM Administrator</tspan>
+  </text>
+  <text class="sub" x="247.5" y="155">
+    <tspan x="247.5">Interactive human sign-in</tspan>
+  </text>
+
+  <line class="arrow" x1="247.5" y1="183" x2="247.5" y2="215" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="85" y="225" width="325" height="88"/>
+  <text class="label" x="247.5" y="260">
+    <tspan x="247.5">Python Assessor</tspan>
+  </text>
+  <text class="sub" x="247.5" y="285">
+    <tspan x="247.5">MSAL public client application</tspan>
+  </text>
+
+  <line class="arrow" x1="247.5" y1="313" x2="247.5" y2="345" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="85" y="355" width="325" height="88"/>
+  <text class="label" x="247.5" y="388">
+    <tspan x="247.5">Microsoft Entra ID</tspan>
+  </text>
+  <text class="sub" x="247.5" y="413">
+    <tspan x="247.5">Interactive delegated authentication</tspan>
+  </text>
+
+  <line class="arrow" x1="247.5" y1="443" x2="247.5" y2="475" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="85" y="485" width="325" height="88"/>
+  <text class="label" x="247.5" y="518">
+    <tspan x="247.5">Delegated Access Token</tspan>
+  </text>
+  <text class="sub" x="247.5" y="543">
+    <tspan x="247.5">Application.Read.All</tspan>
+  </text>
+
+  <line class="arrow" x1="247.5" y1="573" x2="247.5" y2="594" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="85" y="602" width="325" height="58"/>
+  <text class="label" x="247.5" y="638">
+    <tspan x="247.5">Microsoft Graph</tspan>
+  </text>
+
+
+  <!-- RIGHT: ASSESSMENT / REMEDIATION -->
+  <rect class="panel" x="500" y="30" width="425" height="680" rx="2"/>
+  <text class="title" x="712.5" y="66">ASSESSMENT &amp; REMEDIATION CYCLE</text>
+
+  <rect class="node" x="550" y="95" width="325" height="105"/>
+  <text class="label" x="712.5" y="130">
+    <tspan x="712.5">Directory Data from Microsoft Graph</tspan>
+  </text>
+  <text class="sub" x="712.5" y="155">
+    <tspan x="712.5">Applications · service principals</tspan>
+    <tspan x="712.5" dy="19">owners · credentials · permissions</tspan>
+  </text>
+
+  <line class="arrow" x1="712.5" y1="200" x2="712.5" y2="232" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="550" y="242" width="325" height="88"/>
+  <text class="label" x="712.5" y="275">
+    <tspan x="712.5">Local Risk Evaluation</tspan>
+  </text>
+  <text class="sub" x="712.5" y="300">
+    <tspan x="712.5">Ownership · credential age</tspan>
+    <tspan x="712.5" dy="19">permission impact · expiry</tspan>
+  </text>
+
+  <line class="arrow" x1="712.5" y1="330" x2="712.5" y2="362" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="550" y="372" width="325" height="88"/>
+  <text class="label" x="712.5" y="405">
+    <tspan x="712.5">Assessment Outputs</tspan>
+  </text>
+  <text class="sub" x="712.5" y="430">
+    <tspan x="712.5">Terminal findings · JSON · CSV</tspan>
+  </text>
+
+  <line class="arrow" x1="712.5" y1="460" x2="712.5" y2="492" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="550" y="502" width="325" height="88"/>
+  <text class="label" x="712.5" y="535">
+    <tspan x="712.5">Administrator Remediation</tspan>
+  </text>
+  <text class="sub" x="712.5" y="560">
+    <tspan x="712.5">Performed outside the read-only assessor</tspan>
+  </text>
+
+  <line class="arrow" x1="712.5" y1="590" x2="712.5" y2="604" marker-end="url(#arrowhead)"/>
+
+  <rect class="node" x="550" y="612" width="325" height="58"/>
+  <text class="label" x="712.5" y="647">
+    <tspan x="712.5">Reassess &amp; Validate</tspan>
+  </text>
+</svg>

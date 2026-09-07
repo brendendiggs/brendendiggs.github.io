@@ -371,6 +371,117 @@
         flex-direction: column;
       }
     }
+  
+    /* architecture-audit-v2 */
+    .architecture {
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      overflow: visible;
+    }
+
+    .arch-flow {
+      display: grid;
+      gap: 18px;
+    }
+
+    .arch-lane {
+      padding: 20px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+    }
+
+    .arch-lane-title {
+      margin-bottom: 14px;
+      color: var(--gold-light);
+      font-size: 0.88rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .arch-row {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .arch-node {
+      min-width: 0;
+      flex: 1 1 0;
+      min-height: 76px;
+      padding: 14px 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+      text-align: center;
+    }
+
+    .arch-node strong {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .arch-node span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .arch-arrow {
+      align-self: center;
+      color: var(--gold);
+      font-size: 1.25rem;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .arch-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      color: var(--muted);
+      background: var(--panel);
+      border-left: 3px solid var(--gold-dark);
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 850px) {
+      .arch-row {
+        flex-direction: column;
+      }
+
+      .arch-arrow {
+        transform: rotate(90deg);
+        margin: -2px auto;
+      }
+
+      .arch-node {
+        width: 100%;
+      }
+    }
+
+  
+    /* architecture-final-verified */
+    .architecture-svg-shell {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      border: 1px solid var(--border-gold);
+    }
+
+    .architecture-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
   </style>
 </head>
 
@@ -479,16 +590,15 @@
             claims, API access, and account lifecycle management fit together.
           </p>
 
-          <div class="architecture">
-Autumn Solutions User
-        ↓
-Microsoft Entra ID
-        ↓
-        ├── SAML 2.0 → LedgerFlow SAML → Federation + Claims
-        ├── OIDC      → LedgerFlow OIDC → User Authentication
-        ├── OAuth 2.0 → Microsoft Graph → Delegated /me Access
-        └── SCIM 2.0 → LedgerFlow SCIM → Create · Update · Disable
-          </div>
+          
+
+        <div class="architecture architecture-svg-shell">
+          <img
+            class="architecture-svg"
+            src="../assets/iam-02/ledgerflow-identity-architecture.svg"
+            alt="IAM-02 LedgerFlow identity architecture showing SAML federation, OIDC and OAuth 2.0 with PKCE, Microsoft Graph delegated access, and SCIM provisioning"
+          >
+        </div>
         </div>
       </div>
     </section>

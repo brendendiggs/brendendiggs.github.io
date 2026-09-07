@@ -1,0 +1,146 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 960 1180"
+  role="img"
+  aria-labelledby="svg-title svg-desc"
+>
+<title id="svg-title">IAM-03 Identity Lifecycle Automation Architecture</title>
+<desc id="svg-desc">HR-driven Joiner Mover Leaver automation using certificate-based OAuth client credentials and Microsoft Graph.</desc>
+
+<style>
+.bg {
+  fill: #161b21;
+}
+.panel {
+  fill: #12161b;
+  stroke: #655236;
+  stroke-width: 1;
+}
+.node {
+  fill: #1b1916;
+  stroke: #9c7433;
+  stroke-width: 1.2;
+}
+.title {
+  fill: #efcf88;
+  font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-anchor: middle;
+}
+.label {
+  fill: #f2eee7;
+  font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-anchor: middle;
+}
+.sub {
+  fill: #a89f92;
+  font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-anchor: middle;
+}
+.note {
+  fill: #a89f92;
+  font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.arrow {
+  stroke: #d4aa55;
+  stroke-width: 2.5;
+  fill: none;
+}
+</style>
+
+<defs>
+  <marker
+    id="arrowhead"
+    markerWidth="8"
+    markerHeight="8"
+    refX="6"
+    refY="3"
+    orient="auto"
+  >
+    <path d="M0,0 L0,6 L6,3 z" fill="#d4aa55"/>
+  </marker>
+</defs>
+<rect class="bg" x="0" y="0" width="960" height="1180"/>
+
+    <rect class="panel" x="35" y="30" width="425" height="800"/>
+    <text class="title" x="247.5" y="66">
+      HR-DRIVEN LIFECYCLE PATH
+    </text>
+  <rect class="node" x="85" y="95" width="325" height="88"/><text class="label" x="247.5" y="128"><tspan x="247.5">Google Sheets HR Source</tspan></text><text class="sub" x="247.5" y="153"><tspan x="247.5">Authoritative lifecycle events</tspan></text><line
+    class="arrow"
+    x1="247.5"
+    y1="183"
+    x2="247.5"
+    y2="211"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="85" y="219" width="325" height="105"/><text class="label" x="247.5" y="252"><tspan x="247.5">HTTPS CSV Feed</tspan></text><text class="sub" x="247.5" y="277"><tspan x="247.5">Retrieve latest source + validate schema</tspan></text><line
+    class="arrow"
+    x1="247.5"
+    y1="324"
+    x2="247.5"
+    y2="352"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="85" y="360" width="325" height="88"/><text class="label" x="247.5" y="393"><tspan x="247.5">process_hr_events.sh</tspan></text><text class="sub" x="247.5" y="418"><tspan x="247.5">Batch lifecycle controller</tspan></text><line
+    class="arrow"
+    x1="247.5"
+    y1="448"
+    x2="247.5"
+    y2="476"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="85" y="484" width="325" height="88"/><text class="label" x="247.5" y="517"><tspan x="247.5">JML Routing</tspan></text><text class="sub" x="247.5" y="542"><tspan x="247.5">Joiner · Mover · Leaver</tspan></text><line
+    class="arrow"
+    x1="247.5"
+    y1="572"
+    x2="247.5"
+    y2="600"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="85" y="608" width="325" height="88"/><text class="label" x="247.5" y="641"><tspan x="247.5">Event-Specific Scripts</tspan></text><text class="sub" x="247.5" y="666"><tspan x="247.5">joiner.sh · mover.sh · leaver.sh</tspan></text>
+    <rect class="panel" x="500" y="30" width="425" height="800"/>
+    <text class="title" x="712.5" y="66">
+      CERTIFICATE-BASED GRAPH AUTH
+    </text>
+  <rect class="node" x="550" y="95" width="325" height="88"/><text class="label" x="712.5" y="128"><tspan x="712.5">Autumn Graph Automation</tspan></text><text class="sub" x="712.5" y="153"><tspan x="712.5">Dedicated Entra application identity</tspan></text><line
+    class="arrow"
+    x1="712.5"
+    y1="183"
+    x2="712.5"
+    y2="205"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="550" y="213" width="325" height="105"/><text class="label" x="712.5" y="246"><tspan x="712.5">Certificate Credential</tspan></text><text class="sub" x="712.5" y="271"><tspan x="712.5">Public certificate registered in Entra</tspan><tspan x="712.5" dy="19">private key stored outside project</tspan></text><line
+    class="arrow"
+    x1="712.5"
+    y1="318"
+    x2="712.5"
+    y2="340"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="550" y="348" width="325" height="88"/><text class="label" x="712.5" y="381"><tspan x="712.5">Signed Client Assertion</tspan></text><text class="sub" x="712.5" y="406"><tspan x="712.5">Certificate-backed JWT assertion</tspan></text><line
+    class="arrow"
+    x1="712.5"
+    y1="436"
+    x2="712.5"
+    y2="458"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="550" y="466" width="325" height="88"/><text class="label" x="712.5" y="499"><tspan x="712.5">Entra Token Endpoint</tspan></text><text class="sub" x="712.5" y="524"><tspan x="712.5">OAuth 2.0 client credentials</tspan></text><line
+    class="arrow"
+    x1="712.5"
+    y1="554"
+    x2="712.5"
+    y2="576"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="550" y="584" width="325" height="88"/><text class="label" x="712.5" y="617"><tspan x="712.5">Microsoft Graph Access Token</tspan></text><text class="sub" x="712.5" y="642"><tspan x="712.5">Application permissions</tspan></text><line
+    class="arrow"
+    x1="712.5"
+    y1="672"
+    x2="712.5"
+    y2="694"
+    marker-end="url(#arrowhead)"
+  /><rect class="node" x="550" y="702" width="325" height="88"/><text class="label" x="712.5" y="735"><tspan x="712.5">Microsoft Graph API</tspan></text><text class="sub" x="712.5" y="760"><tspan x="712.5">Users · groups · licenses</tspan></text>
+    <rect class="panel" x="35" y="860" width="890" height="290"/>
+    <text class="title" x="480" y="896">
+      AUTOMATED IDENTITY OUTCOMES
+    </text>
+  <rect class="node" x="55" y="925" width="250" height="150"/><text class="label" x="180" y="958"><tspan x="180">Joiner</tspan></text><text class="sub" x="180" y="983"><tspan x="180">Create account · attributes</tspan><tspan x="180" dy="19">department group · SG-All-Employees</tspan><tspan x="180" dy="19">assign Entra ID P2</tspan></text><rect class="node" x="355" y="925" width="250" height="150"/><text class="label" x="480" y="958"><tspan x="480">Mover</tspan></text><text class="sub" x="480" y="983"><tspan x="480">Update attributes</tspan><tspan x="480" dy="19">add new department access</tspan><tspan x="480" dy="19">remove obsolete department access</tspan></text><rect class="node" x="655" y="925" width="250" height="150"/><text class="label" x="780" y="958"><tspan x="780">Leaver</tspan></text><text class="sub" x="780" y="983"><tspan x="780">Remove managed access</tspan><tspan x="780" dy="19">reclaim Entra ID P2</tspan><tspan x="780" dy="19">disable account</tspan></text>
+    <text class="note" x="58" y="1112">
+      Every lifecycle action writes a structured audit record with timestamp, event, user, result, and message.
+    </text>
+  
+</svg>

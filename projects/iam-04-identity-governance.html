@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IAM-04 | Identity Governance | Brenden Diggs</title>
+
+  <meta
+    name="description"
+    content="Microsoft Entra Identity Governance project covering entitlement management, access packages, approval workflows, recurring access reviews, least privilege, and automated access revocation."
+  >
+
+  <style>
+    :root {
+      --bg: #0d1014;
+      --bg-soft: #12161b;
+      --panel: #161b21;
+      --panel-warm: #1b1916;
+      --text: #f2eee7;
+      --text-soft: #d4cec4;
+      --muted: #a89f92;
+      --subtle: #81786d;
+      --gold: #d4aa55;
+      --gold-light: #efcf88;
+      --gold-dark: #9c7433;
+      --border: #37322c;
+      --border-soft: #292722;
+      --border-gold: #655236;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 16, 20, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 750;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 100px 0 84px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 930px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+
+    .hero-copy {
+      max-width: 830px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      font-size: 0.94rem;
+      font-weight: 700;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: #17120b;
+    }
+
+    .metrics {
+      padding: 28px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric {
+      padding: 20px 26px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric-value {
+      color: var(--gold-light);
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 750;
+    }
+
+    .metric-label {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    section.content {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 52px;
+    }
+
+    .section-marker {
+      padding-top: 5px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .technology-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .technology-list span {
+      padding: 9px 13px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .architecture {
+      margin-top: 34px;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.93rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+
+    .remediation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .remediation {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .remediation-number {
+      color: var(--gold);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .remediation h3 {
+      margin-top: 8px;
+      color: var(--gold-light);
+      font-size: 1.28rem;
+    }
+
+    .remediation p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .risk-box {
+      margin-top: 32px;
+      padding: 30px;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+    }
+
+    .risk-box h3 {
+      color: var(--gold-light);
+      font-size: 1.4rem;
+    }
+
+    .risk-box p {
+      margin-top: 13px;
+      color: var(--text-soft);
+    }
+
+    .risk-box ul {
+      margin: 18px 0 0 20px;
+      color: var(--muted);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 36px;
+    }
+
+    figure {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+    }
+
+    figcaption {
+      padding: 18px 20px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .result {
+      padding: 92px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .result-copy {
+      max-width: 850px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 1.12rem;
+      line-height: 1.85;
+    }
+
+    footer {
+      padding: 34px 0;
+      background: #080b0e;
+      color: var(--subtle);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 800px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  
+    /* architecture-audit-v2 */
+    .architecture {
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      overflow: visible;
+    }
+
+    .arch-flow {
+      display: grid;
+      gap: 18px;
+    }
+
+    .arch-lane {
+      padding: 20px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+    }
+
+    .arch-lane-title {
+      margin-bottom: 14px;
+      color: var(--gold-light);
+      font-size: 0.88rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .arch-row {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .arch-node {
+      min-width: 0;
+      flex: 1 1 0;
+      min-height: 76px;
+      padding: 14px 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+      text-align: center;
+    }
+
+    .arch-node strong {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .arch-node span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .arch-arrow {
+      align-self: center;
+      color: var(--gold);
+      font-size: 1.25rem;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .arch-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      color: var(--muted);
+      background: var(--panel);
+      border-left: 3px solid var(--gold-dark);
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 850px) {
+      .arch-row {
+        flex-direction: column;
+      }
+
+      .arch-arrow {
+        transform: rotate(90deg);
+        margin: -2px auto;
+      }
+
+      .arch-node {
+        width: 100%;
+      }
+    }
+
+  
+    /* architecture-final-verified */
+    .architecture-svg-shell {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      border: 1px solid var(--border-gold);
+    }
+
+    .architecture-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+  </style>
+  
+<style>
+  .lifecycle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 34px;
+  }
+
+  .lifecycle-card {
+    padding: 28px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .lifecycle-number {
+    color: var(--gold);
+    font-size: 0.86rem;
+    font-weight: 750;
+  }
+
+  .lifecycle-card h3 {
+    margin-top: 8px;
+    color: var(--gold-light);
+    font-size: 1.28rem;
+  }
+
+  .lifecycle-card p {
+    margin-top: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 760px) {
+    .lifecycle-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Brenden Diggs</a>
+
+      <a class="back-link" href="../index.html">
+        Back to Portfolio
+      </a>
+    </div>
+  </nav>
+
+
+  <header class="hero">
+    <div class="container">
+
+      <div class="eyebrow">
+        IAM-04 / Identity Governance
+      </div>
+
+      <h1>
+        Governed Finance Access Lifecycle
+      </h1>
+
+      <p class="hero-copy">
+        Designed and validated an end-to-end Microsoft Entra Identity Governance
+        workflow for sensitive Finance access. The solution governs access from
+        business request and approval through automated provisioning, periodic
+        certification, denial, and automatic revocation.
+      </p>
+
+      <div class="hero-actions">
+
+        <a
+          class="button"
+          href="https://github.com/brendendiggs/autumn-solutions-iam-04-identity-governance"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub Evidence
+        </a>
+
+        <a class="button" href="#evidence">
+          View Evidence
+        </a>
+
+      </div>
+    </div>
+  </header>
+
+
+  <section class="metrics">
+    <div class="container">
+      <div class="metric-grid">
+
+        <div class="metric">
+          <div class="metric-value">30 Days</div>
+          <div class="metric-label">Time-bound assignment</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">1 Stage</div>
+          <div class="metric-label">Business approval</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">Monthly</div>
+          <div class="metric-label">Access review cadence</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">Automatic</div>
+          <div class="metric-label">Governance revocation</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="content">
+    <div class="container section-grid">
+
+      <div class="section-marker">
+        01 / Challenge
+      </div>
+
+      <div>
+
+        <h2>
+          Sensitive access should have a lifecycle, not just an approval.
+        </h2>
+
+        <p class="lead">
+          Autumn Solutions needed a governed method for granting temporary
+          Finance access without relying on permanent group membership or
+          manual administrator cleanup. The control needed to capture business
+          justification, separate the requester from the approver, provision
+          access automatically, periodically recertify the assignment, and
+          remove access when it was no longer required.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="content">
+    <div class="container section-grid">
+
+      <div class="section-marker">
+        02 / Design
+      </div>
+
+      <div>
+
+        <h2>
+          Microsoft Entra Entitlement Management as the governance layer.
+        </h2>
+
+        <p class="lead">
+          I created a Finance access catalog and access package containing
+          SG-Finance and the LedgerFlow enterprise application. Taylor Brooks
+          could request the package, while Jordan Lee served as the business
+          approver and recurring access reviewer.
+        </p>
+
+        <div class="technology-list">
+          <span>Microsoft Entra ID</span>
+          <span>Identity Governance</span>
+          <span>Entitlement Management</span>
+          <span>Access Packages</span>
+          <span>Approval Workflows</span>
+          <span>Access Reviews</span>
+          <span>Least Privilege</span>
+        </div>
+
+        
+
+        <div class="architecture architecture-svg-shell">
+          <img
+            class="architecture-svg"
+            src="../assets/iam-04/identity-governance-architecture.svg"
+            alt="IAM-04 Microsoft Entra Identity Governance lifecycle showing access request, approval, entitlement provisioning, access review, denial, and automatic revocation"
+          >
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="content">
+    <div class="container section-grid">
+
+      <div class="section-marker">
+        03 / Lifecycle
+      </div>
+
+      <div>
+
+        <h2>
+          Request to revocation without manual access cleanup.
+        </h2>
+
+        <div class="lifecycle-grid">
+
+          <div class="lifecycle-card">
+            <div class="lifecycle-number">01</div>
+            <h3>Request</h3>
+            <p>
+              Taylor requested Finance access and supplied the required
+              business-process answer and justification.
+            </p>
+          </div>
+
+          <div class="lifecycle-card">
+            <div class="lifecycle-number">02</div>
+            <h3>Approve & Provision</h3>
+            <p>
+              Jordan approved the request. Entitlement Management then
+              provisioned SG-Finance membership and LedgerFlow access
+              automatically.
+            </p>
+          </div>
+
+          <div class="lifecycle-card">
+            <div class="lifecycle-number">03</div>
+            <h3>Review & Deny</h3>
+            <p>
+              The scheduled recurring review activated automatically.
+              Jordan determined that the temporary business need had ended
+              and denied continued access.
+            </p>
+          </div>
+
+          <div class="lifecycle-card">
+            <div class="lifecycle-number">04</div>
+            <h3>Apply & Revoke</h3>
+            <p>
+              Entra applied the review result, expired the governed
+              assignment, removed Taylor from SG-Finance, and removed
+              LedgerFlow access without a manual administrator removal.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="content" id="evidence">
+    <div class="container section-grid">
+
+      <div class="section-marker">
+        04 / Evidence
+      </div>
+
+      <div>
+
+        <h2>
+          Governance lifecycle evidence
+        </h2>
+
+        <p class="lead">
+          The evidence below captures the business decision, active
+          certification process, reviewer denial, applied results, and
+          downstream revocation.
+        </p>
+
+        <div class="evidence-grid">
+
+          <figure>
+            <img
+              src="../assets/iam-04/02-Jordan-Approval-Approved.png"
+              alt="Jordan Lee approving the Finance access request"
+            >
+            <figcaption>
+              Business approval captured before access provisioning.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../assets/iam-04/06-Jordan-Access-Review-Active.png"
+              alt="Active Microsoft Entra access review"
+            >
+            <figcaption>
+              Scheduled Finance access review automatically entered the active state.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../assets/iam-04/08-Jordan-Access-Review-Denied.png"
+              alt="Jordan Lee denying Taylor Brooks continued access"
+            >
+            <figcaption>
+              Jordan denied continued access after the temporary business need ended.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../assets/iam-04/12-Access-Review-Results-Applied.png"
+              alt="Microsoft Entra access review results applied"
+            >
+            <figcaption>
+              Entra completed the governance workflow and applied the review result.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../assets/iam-04/14-Taylor-SG-Finance-Access-Revoked.png"
+              alt="Taylor Brooks removed from SG-Finance"
+            >
+            <figcaption>
+              SG-Finance membership was revoked through the governance lifecycle.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../assets/iam-04/15-Taylor-LedgerFlow-Access-Revoked.png"
+              alt="Taylor Brooks removed from LedgerFlow"
+            >
+            <figcaption>
+              LedgerFlow access was also removed after the review result was applied.
+            </figcaption>
+          </figure>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="result">
+    <div class="container section-grid">
+
+      <div class="section-marker">
+        05 / Result
+      </div>
+
+      <div>
+
+        <h2>
+          A complete governed access lifecycle.
+        </h2>
+
+        <p class="lead">
+          The final implementation demonstrates that sensitive business access
+          can be governed as a lifecycle rather than a one-time administrative
+          action. Business justification was captured, approval responsibility
+          was separated from IAM administration, access was provisioned
+          automatically, continued need was recertified, and a Deny decision
+          ultimately removed both group and application access automatically.
+        </p>
+
+        <div class="risk-box">
+          <h3>Key control outcome</h3>
+
+          <p>
+            No manual removal from SG-Finance or LedgerFlow was used to
+            complete the revocation. The access review decision drove the
+            governance lifecycle through expiration and downstream removal.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
