@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IAM-02 | Enterprise SSO & Federation | Brenden Diggs</title>
+
+  <meta
+    name="description"
+    content="Microsoft Entra enterprise identity federation project covering SAML SSO, OpenID Connect, OAuth 2.0 with PKCE, Microsoft Graph delegated access, and SCIM provisioning."
+  >
+
+  <style>
+    :root {
+      --bg: #0d1014;
+      --bg-soft: #12161b;
+      --panel: #161b21;
+      --panel-warm: #1b1916;
+      --text: #f2eee7;
+      --text-soft: #d4cec4;
+      --muted: #a89f92;
+      --subtle: #81786d;
+      --gold: #d4aa55;
+      --gold-light: #efcf88;
+      --gold-dark: #9c7433;
+      --border: #37322c;
+      --border-soft: #292722;
+      --border-gold: #655236;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 16, 20, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 750;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 100px 0 84px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 930px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+
+    .hero-copy {
+      max-width: 830px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      font-size: 0.94rem;
+      font-weight: 700;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: #17120b;
+    }
+
+    .metrics {
+      padding: 28px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric {
+      padding: 20px 26px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric-value {
+      color: var(--gold-light);
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 750;
+    }
+
+    .metric-label {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    section.content {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 52px;
+    }
+
+    .section-marker {
+      padding-top: 5px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .technology-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .technology-list span {
+      padding: 9px 13px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .architecture {
+      margin-top: 34px;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.93rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+
+    .remediation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .remediation {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .remediation-number {
+      color: var(--gold);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .remediation h3 {
+      margin-top: 8px;
+      color: var(--gold-light);
+      font-size: 1.28rem;
+    }
+
+    .remediation p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .risk-box {
+      margin-top: 32px;
+      padding: 30px;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+    }
+
+    .risk-box h3 {
+      color: var(--gold-light);
+      font-size: 1.4rem;
+    }
+
+    .risk-box p {
+      margin-top: 13px;
+      color: var(--text-soft);
+    }
+
+    .risk-box ul {
+      margin: 18px 0 0 20px;
+      color: var(--muted);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 36px;
+    }
+
+    figure {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+    }
+
+    figcaption {
+      padding: 18px 20px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .result {
+      padding: 92px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .result-copy {
+      max-width: 850px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 1.12rem;
+      line-height: 1.85;
+    }
+
+    footer {
+      padding: 34px 0;
+      background: #080b0e;
+      color: var(--subtle);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 800px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Brenden Diggs</a>
+      <a class="back-link" href="../index.html#iam">← Back to IAM Projects</a>
+    </div>
+  </nav>
+
+  
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">IAM-02 · Autumn Solutions</div>
+
+        <h1>Enterprise SSO & Federation</h1>
+
+        <p class="hero-copy">
+          I built a multi-protocol enterprise identity integration for
+          LedgerFlow, a fictional Autumn Solutions SaaS application. The
+          solution demonstrates SAML 2.0 federation, OpenID Connect, OAuth 2.0
+          Authorization Code with PKCE, Microsoft Graph delegated access, and
+          SCIM provisioning across one identity architecture.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-02-enterprise-sso-federation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Technical Evidence on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="container metric-grid">
+        <div class="metric">
+          <div class="metric-value">SAML</div>
+          <div class="metric-label">Enterprise federation</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">OIDC</div>
+          <div class="metric-label">Modern authentication</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">OAuth</div>
+          <div class="metric-label">Delegated API access</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">SCIM</div>
+          <div class="metric-label">Lifecycle provisioning</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">01 / Challenge</div>
+
+        <div>
+          <h2>Connect an enterprise SaaS application to the full identity lifecycle.</h2>
+
+          <p class="lead">
+            Autumn Solutions needed more than a simple sign-in demo. LedgerFlow
+            had to support enterprise federation, modern web authentication,
+            delegated Microsoft Graph access, custom identity claims, and
+            automated account provisioning and deprovisioning.
+          </p>
+
+          <div class="technology-list">
+            <span>Microsoft Entra ID</span>
+            <span>SAML 2.0</span>
+            <span>OpenID Connect</span>
+            <span>OAuth 2.0</span>
+            <span>PKCE</span>
+            <span>Microsoft Graph</span>
+            <span>SCIM 2.0</span>
+            <span>Node.js</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">02 / Architecture</div>
+
+        <div>
+          <h2>One application, multiple enterprise identity protocols.</h2>
+
+          <p class="lead">
+            Microsoft Entra ID acts as the identity provider and authorization
+            platform while LedgerFlow implements separate SAML, OIDC, and SCIM
+            components. This demonstrates how authentication, authorization,
+            claims, API access, and account lifecycle management fit together.
+          </p>
+
+          <div class="architecture">
+Autumn Solutions User
+        ↓
+Microsoft Entra ID
+        ↓
+        ├── SAML 2.0 → LedgerFlow SAML → Federation + Claims
+        ├── OIDC      → LedgerFlow OIDC → User Authentication
+        ├── OAuth 2.0 → Microsoft Graph → Delegated /me Access
+        └── SCIM 2.0 → LedgerFlow SCIM → Create · Update · Disable
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">03 / Federation</div>
+
+        <div>
+          <h2>SAML federation with deliberate claim design.</h2>
+
+          <div class="remediation-grid">
+
+            <div class="remediation">
+              <div class="remediation-number">01</div>
+              <h3>Service Provider Configuration</h3>
+              <p>
+                Configured the LedgerFlow service provider and Microsoft Entra
+                enterprise application with the required SAML identifiers,
+                reply URL, sign-on configuration, and signing trust.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">02</div>
+              <h3>NameID & Claims</h3>
+              <p>
+                Configured the SAML NameID and added a custom department claim
+                so LedgerFlow receives business-relevant identity attributes
+                rather than authentication alone.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">03</div>
+              <h3>Group-Based Assignment</h3>
+              <p>
+                Controlled application access through Entra assignment instead
+                of exposing the application indiscriminately to every tenant
+                user.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">04</div>
+              <h3>Certificate Troubleshooting</h3>
+              <p>
+                Diagnosed a SAML validation failure to a stale signing
+                certificate and restored federation by aligning LedgerFlow with
+                the current Entra signing certificate.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">04 / Modern Auth</div>
+
+        <div>
+          <h2>OIDC authentication and OAuth delegated authorization.</h2>
+
+          <p class="lead">
+            A separate LedgerFlow OIDC application implemented modern user
+            authentication through Microsoft Entra ID. The authorization flow
+            used OAuth 2.0 Authorization Code with PKCE and obtained delegated
+            Microsoft Graph access for the signed-in user.
+          </p>
+
+          <div class="risk-box">
+            <h3>Authentication vs Authorization</h3>
+
+            <p>
+              The project intentionally demonstrates the difference between
+              proving who the user is and authorizing an application to access
+              an API on that user's behalf.
+            </p>
+
+            <ul>
+              <li>OIDC ID token for authenticated identity claims</li>
+              <li>OAuth 2.0 authorization code flow</li>
+              <li>PKCE protection for the authorization exchange</li>
+              <li>Delegated Microsoft Graph access</li>
+              <li>Successful Graph <strong>/me</strong> request</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">05 / Provisioning</div>
+
+        <div>
+          <h2>SCIM connected access decisions to account lifecycle.</h2>
+
+          <p class="lead">
+            LedgerFlow's SCIM service receives lifecycle changes from Microsoft
+            Entra provisioning. The workflow was validated across creation,
+            persistent storage, attribute updates, and disablement.
+          </p>
+
+          <div class="remediation-grid">
+
+            <div class="remediation">
+              <div class="remediation-number">CREATE</div>
+              <h3>Provision User</h3>
+              <p>
+                Entra successfully created the target LedgerFlow identity
+                through the SCIM service.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">UPDATE</div>
+              <h3>Synchronize Attributes</h3>
+              <p>
+                Identity attribute changes were propagated into the persistent
+                LedgerFlow user store.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">DISABLE</div>
+              <h3>Deprovision Access</h3>
+              <p>
+                Removing the user from provisioning scope resulted in the
+                LedgerFlow identity being disabled through the SCIM lifecycle.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">VALIDATE</div>
+              <h3>Troubleshoot Failures</h3>
+              <p>
+                Out-of-scope and target-write failures were investigated and
+                corrected rather than bypassed, preserving evidence of the
+                troubleshooting process.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">06 / Evidence</div>
+
+        <div>
+          <h2>Federation, authorization, and provisioning evidence.</h2>
+
+          <div class="evidence-grid">
+
+            <figure>
+              <img
+                src="../assets/iam-02/16-SAML-Custom-LedgerFlow-SSO-Success.png"
+                alt="Successful custom LedgerFlow SAML single sign-on"
+              >
+              <figcaption>
+                Successful service-provider-initiated SAML authentication into
+                the custom LedgerFlow application.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-02/17-SAML-Custom-LedgerFlow-Claims.png"
+                alt="LedgerFlow SAML identity claims"
+              >
+              <figcaption>
+                LedgerFlow receiving the configured SAML identity claims after
+                federation.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-02/06-OIDC-Sign-In-Success.png"
+                alt="Successful LedgerFlow OpenID Connect sign in"
+              >
+              <figcaption>
+                Successful user authentication through the LedgerFlow OpenID
+                Connect application.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-02/08-OAuth-Graph-Delegated-Access-Success.png"
+                alt="Successful OAuth delegated Microsoft Graph access"
+              >
+              <figcaption>
+                OAuth delegated authorization successfully used to access
+                Microsoft Graph on behalf of the signed-in user.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-02/11-SCIM-Provisioning-Success.png"
+                alt="Successful SCIM user provisioning"
+              >
+              <figcaption>
+                Microsoft Entra successfully provisioning the LedgerFlow user
+                through SCIM.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-02/14-SCIM-Deprovisioning-Success.png"
+                alt="Successful SCIM user deprovisioning"
+              >
+              <figcaption>
+                SCIM lifecycle validation showing successful removal of active
+                access through deprovisioning.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result">
+      <div class="container">
+        <div class="eyebrow">Outcome</div>
+
+        <h2>Authentication, authorization, federation, and provisioning in one identity architecture.</h2>
+
+        <p class="result-copy">
+          IAM-02 demonstrates how modern enterprise applications integrate with
+          Microsoft Entra across the full identity stack. The project combines
+          SAML federation, custom claims, OpenID Connect authentication, OAuth
+          delegated authorization, Microsoft Graph, and SCIM lifecycle
+          provisioning while preserving real troubleshooting evidence from the
+          implementation.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-02-enterprise-sso-federation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore GitHub Evidence
+          </a>
+
+          <a class="button" href="../index.html#iam">
+            View All IAM Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>Brenden Diggs</span>
+      <span>Identity Engineering · GRC · AI Governance</span>
+    </div>
+  </footer>
+
+</body>
+</html>
