@@ -532,6 +532,38 @@
       }
     }
 
+  
+    /* iam-final-evidence-presentation */
+    #evidence .evidence-grid figure {
+      text-align: center;
+    }
+
+    #evidence .evidence-fullres {
+      display: block;
+      width: 100%;
+      background: var(--panel);
+      cursor: zoom-in;
+    }
+
+    #evidence .evidence-grid figure img {
+      display: block;
+
+      /* Critical: never enlarge a screenshot past native size. */
+      width: auto;
+      max-width: 100%;
+      height: auto;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      object-fit: contain;
+      image-rendering: auto;
+    }
+
+    #evidence figcaption {
+      text-align: left;
+    }
+
   </style>
   
 <style>

@@ -532,6 +532,38 @@
       }
     }
 
+  
+    /* iam-final-evidence-presentation */
+    #evidence .evidence-grid figure {
+      text-align: center;
+    }
+
+    #evidence .evidence-fullres {
+      display: block;
+      width: 100%;
+      background: var(--panel);
+      cursor: zoom-in;
+    }
+
+    #evidence .evidence-grid figure img {
+      display: block;
+
+      /* Critical: never enlarge a screenshot past native size. */
+      width: auto;
+      max-width: 100%;
+      height: auto;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      object-fit: contain;
+      image-rendering: auto;
+    }
+
+    #evidence figcaption {
+      text-align: left;
+    }
+
   </style>
 </head>
 
@@ -602,7 +634,7 @@
       </div>
     </section>
 
-    <section class="content">
+    <section class="content" id="evidence">
       <div class="container section-grid">
         <div class="section-marker">01 / Challenge</div>
 
@@ -805,7 +837,7 @@
 
     <section class="content">
       <div class="container section-grid">
-        <div class="section-marker">06 / Evidence</div>
+        <div class="section-marker">05 / Outcome</div>
 
         <div>
           <h2>Federation, authorization, and provisioning evidence.</h2>
@@ -941,7 +973,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Explore GitHub Evidence
+            Explore View GitHub
           </a>
 
           <a class="button" href="../index.html#iam">
