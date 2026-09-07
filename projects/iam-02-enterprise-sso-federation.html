@@ -482,6 +482,56 @@
       height: auto;
     }
 
+  
+    /* iam-evidence-image-qa */
+    .evidence-grid {
+      width: 100%;
+    }
+
+    .evidence-grid figure {
+      overflow: hidden;
+    }
+
+    .evidence-grid figure a {
+      display: block;
+      background: #0d1014;
+      cursor: zoom-in;
+    }
+
+    .evidence-grid figure img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+      image-rendering: auto;
+    }
+
+    .evidence-grid figcaption {
+      line-height: 1.6;
+    }
+
+    @media (min-width: 900px) {
+      .evidence-grid {
+        width: min(1320px, calc(100vw - 64px));
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .evidence-grid figure {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .evidence-grid {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
+      }
+    }
+
   </style>
 </head>
 
@@ -512,15 +562,19 @@
         </p>
 
         <div class="hero-actions">
-          <a
-            class="button"
-            href="https://github.com/brendendiggs/autumn-solutions-iam-02-enterprise-sso-federation"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Technical Evidence on GitHub
-          </a>
-        </div>
+        <a class="button" href="#evidence">
+          View Evidence
+        </a>
+
+        <a
+          class="button"
+          href="https://github.com/brendendiggs/autumn-solutions-iam-02-enterprise-sso-federation"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View GitHub
+        </a>
+      </div>
       </div>
     </section>
 
@@ -759,10 +813,16 @@
           <div class="evidence-grid">
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-02/16-SAML-Custom-LedgerFlow-SSO-Success.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-02/16-SAML-Custom-LedgerFlow-SSO-Success.png"
                 alt="Successful custom LedgerFlow SAML single sign-on"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Successful service-provider-initiated SAML authentication into
                 the custom LedgerFlow application.
@@ -770,10 +830,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-02/17-SAML-Custom-LedgerFlow-Claims.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-02/17-SAML-Custom-LedgerFlow-Claims.png"
                 alt="LedgerFlow SAML identity claims"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 LedgerFlow receiving the configured SAML identity claims after
                 federation.
@@ -781,10 +847,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-02/06-OIDC-Sign-In-Success.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-02/06-OIDC-Sign-In-Success.png"
                 alt="Successful LedgerFlow OpenID Connect sign in"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Successful user authentication through the LedgerFlow OpenID
                 Connect application.
@@ -792,10 +864,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-02/08-OAuth-Graph-Delegated-Access-Success.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-02/08-OAuth-Graph-Delegated-Access-Success.png"
                 alt="Successful OAuth delegated Microsoft Graph access"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 OAuth delegated authorization successfully used to access
                 Microsoft Graph on behalf of the signed-in user.
@@ -803,10 +881,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-02/11-SCIM-Provisioning-Success.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-02/11-SCIM-Provisioning-Success.png"
                 alt="Successful SCIM user provisioning"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Microsoft Entra successfully provisioning the LedgerFlow user
                 through SCIM.
@@ -814,10 +898,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-02/14-SCIM-Deprovisioning-Success.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-02/14-SCIM-Deprovisioning-Success.png"
                 alt="Successful SCIM user deprovisioning"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 SCIM lifecycle validation showing successful removal of active
                 access through deprovisioning.

@@ -482,6 +482,56 @@
       height: auto;
     }
 
+  
+    /* iam-evidence-image-qa */
+    .evidence-grid {
+      width: 100%;
+    }
+
+    .evidence-grid figure {
+      overflow: hidden;
+    }
+
+    .evidence-grid figure a {
+      display: block;
+      background: #0d1014;
+      cursor: zoom-in;
+    }
+
+    .evidence-grid figure img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+      image-rendering: auto;
+    }
+
+    .evidence-grid figcaption {
+      line-height: 1.6;
+    }
+
+    @media (min-width: 900px) {
+      .evidence-grid {
+        width: min(1320px, calc(100vw - 64px));
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .evidence-grid figure {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .evidence-grid {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
+      }
+    }
+
   </style>
   
 <style>
@@ -556,6 +606,9 @@
       </p>
 
       <div class="hero-actions">
+        <a class="button" href="#evidence">
+          View Evidence
+        </a>
 
         <a
           class="button"
@@ -563,13 +616,8 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub Evidence
+          View GitHub
         </a>
-
-        <a class="button" href="#evidence">
-          View Evidence
-        </a>
-
       </div>
     </div>
   </header>
@@ -759,60 +807,96 @@
         <div class="evidence-grid">
 
           <figure>
-            <img
+            <a
+              class="evidence-fullres"
+              href="../assets/iam-04/02-Jordan-Approval-Approved.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
               src="../assets/iam-04/02-Jordan-Approval-Approved.png"
               alt="Jordan Lee approving the Finance access request"
-            >
+             loading="lazy" decoding="async"></a>
             <figcaption>
               Business approval captured before access provisioning.
             </figcaption>
           </figure>
 
           <figure>
-            <img
+            <a
+              class="evidence-fullres"
+              href="../assets/iam-04/06-Jordan-Access-Review-Active.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
               src="../assets/iam-04/06-Jordan-Access-Review-Active.png"
               alt="Active Microsoft Entra access review"
-            >
+             loading="lazy" decoding="async"></a>
             <figcaption>
               Scheduled Finance access review automatically entered the active state.
             </figcaption>
           </figure>
 
           <figure>
-            <img
+            <a
+              class="evidence-fullres"
+              href="../assets/iam-04/08-Jordan-Access-Review-Denied.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
               src="../assets/iam-04/08-Jordan-Access-Review-Denied.png"
               alt="Jordan Lee denying Taylor Brooks continued access"
-            >
+             loading="lazy" decoding="async"></a>
             <figcaption>
               Jordan denied continued access after the temporary business need ended.
             </figcaption>
           </figure>
 
           <figure>
-            <img
+            <a
+              class="evidence-fullres"
+              href="../assets/iam-04/12-Access-Review-Results-Applied.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
               src="../assets/iam-04/12-Access-Review-Results-Applied.png"
               alt="Microsoft Entra access review results applied"
-            >
+             loading="lazy" decoding="async"></a>
             <figcaption>
               Entra completed the governance workflow and applied the review result.
             </figcaption>
           </figure>
 
           <figure>
-            <img
+            <a
+              class="evidence-fullres"
+              href="../assets/iam-04/14-Taylor-SG-Finance-Access-Revoked.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
               src="../assets/iam-04/14-Taylor-SG-Finance-Access-Revoked.png"
               alt="Taylor Brooks removed from SG-Finance"
-            >
+             loading="lazy" decoding="async"></a>
             <figcaption>
               SG-Finance membership was revoked through the governance lifecycle.
             </figcaption>
           </figure>
 
           <figure>
-            <img
+            <a
+              class="evidence-fullres"
+              href="../assets/iam-04/15-Taylor-LedgerFlow-Access-Revoked.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
               src="../assets/iam-04/15-Taylor-LedgerFlow-Access-Revoked.png"
               alt="Taylor Brooks removed from LedgerFlow"
-            >
+             loading="lazy" decoding="async"></a>
             <figcaption>
               LedgerFlow access was also removed after the review result was applied.
             </figcaption>
@@ -828,9 +912,7 @@
   <section class="result">
     <div class="container section-grid">
 
-      <div class="section-marker">
-        05 / Result
-      </div>
+      <div class="section-marker">05 / Outcome</div>
 
       <div>
 

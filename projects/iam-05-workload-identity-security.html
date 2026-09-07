@@ -496,7 +496,57 @@
       height: auto;
     }
 
-    </style>
+    
+    /* iam-evidence-image-qa */
+    .evidence-grid {
+      width: 100%;
+    }
+
+    .evidence-grid figure {
+      overflow: hidden;
+    }
+
+    .evidence-grid figure a {
+      display: block;
+      background: #0d1014;
+      cursor: zoom-in;
+    }
+
+    .evidence-grid figure img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+      image-rendering: auto;
+    }
+
+    .evidence-grid figcaption {
+      line-height: 1.6;
+    }
+
+    @media (min-width: 900px) {
+      .evidence-grid {
+        width: min(1320px, calc(100vw - 64px));
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .evidence-grid figure {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .evidence-grid {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
@@ -526,15 +576,19 @@
         </p>
 
         <div class="hero-actions">
-          <a
-            class="button"
-            href="https://github.com/brendendiggs/autumn-solutions-iam-05-workload-identity-security"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Technical Evidence on GitHub
-          </a>
-        </div>
+        <a class="button" href="#evidence">
+          View Evidence
+        </a>
+
+        <a
+          class="button"
+          href="https://github.com/brendendiggs/autumn-solutions-iam-05-workload-identity-security"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View GitHub
+        </a>
+      </div>
       </div>
     </section>
 
@@ -718,10 +772,16 @@
           <div class="evidence-grid">
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-05/01-Workload-Identity-Assessment-Baseline.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-05/01-Workload-Identity-Assessment-Baseline.png"
                 alt="Initial workload identity assessment showing baseline findings"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Baseline assessment: 15 findings across five applications and
                 five local service principals.
@@ -729,10 +789,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-05/06-Least-Privilege-Token-Validation.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-05/06-Least-Privilege-Token-Validation.png"
                 alt="Certificate authenticated token validation after least privilege remediation"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Token validation confirmed the reduced Microsoft Graph
                 application permission set while required Graph operations
@@ -741,10 +807,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-05/09-LedgerFlow-OIDC-New-Secret-Validation.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-05/09-LedgerFlow-OIDC-New-Secret-Validation.png"
                 alt="Successful LedgerFlow OIDC sign in after client secret rotation"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Successful LedgerFlow OIDC authentication after controlled
                 client-secret rotation and before removal of the old credential.
@@ -752,10 +824,16 @@
             </figure>
 
             <figure>
-              <img
+              <a
+              class="evidence-fullres"
+              href="../assets/iam-05/11-Workload-Identity-Assessment-Governed-Final-State.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open evidence screenshot at full resolution"
+            ><img
                 src="../assets/iam-05/11-Workload-Identity-Assessment-Governed-Final-State.png"
                 alt="Final workload identity assessment with no unresolved findings"
-              >
+               loading="lazy" decoding="async"></a>
               <figcaption>
                 Final governed state: zero unresolved findings and one formally
                 accepted business-required high-impact permission.
