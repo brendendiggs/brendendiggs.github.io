@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IAM-05 | Identity Threat & Workload Security | Brenden Diggs</title>
+
+  <meta
+    name="description"
+    content="Microsoft Entra workload identity security project covering Microsoft Graph assessment, service principals, credential rotation, least privilege, Python automation, and governed risk acceptance."
+  >
+
+  <style>
+    :root {
+      --bg: #0d1014;
+      --bg-soft: #12161b;
+      --panel: #161b21;
+      --panel-warm: #1b1916;
+      --text: #f2eee7;
+      --text-soft: #d4cec4;
+      --muted: #a89f92;
+      --subtle: #81786d;
+      --gold: #d4aa55;
+      --gold-light: #efcf88;
+      --gold-dark: #9c7433;
+      --border: #37322c;
+      --border-soft: #292722;
+      --border-gold: #655236;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 16, 20, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 750;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 100px 0 84px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 930px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+
+    .hero-copy {
+      max-width: 830px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      font-size: 0.94rem;
+      font-weight: 700;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: #17120b;
+    }
+
+    .metrics {
+      padding: 28px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric {
+      padding: 20px 26px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric-value {
+      color: var(--gold-light);
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 750;
+    }
+
+    .metric-label {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    section.content {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 52px;
+    }
+
+    .section-marker {
+      padding-top: 5px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .technology-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .technology-list span {
+      padding: 9px 13px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .architecture {
+      margin-top: 34px;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.93rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+
+    .remediation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .remediation {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .remediation-number {
+      color: var(--gold);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .remediation h3 {
+      margin-top: 8px;
+      color: var(--gold-light);
+      font-size: 1.28rem;
+    }
+
+    .remediation p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .risk-box {
+      margin-top: 32px;
+      padding: 30px;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+    }
+
+    .risk-box h3 {
+      color: var(--gold-light);
+      font-size: 1.4rem;
+    }
+
+    .risk-box p {
+      margin-top: 13px;
+      color: var(--text-soft);
+    }
+
+    .risk-box ul {
+      margin: 18px 0 0 20px;
+      color: var(--muted);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 36px;
+    }
+
+    figure {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+    }
+
+    figcaption {
+      padding: 18px 20px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .result {
+      padding: 92px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .result-copy {
+      max-width: 850px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 1.12rem;
+      line-height: 1.85;
+    }
+
+    footer {
+      padding: 34px 0;
+      background: #080b0e;
+      color: var(--subtle);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 800px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Brenden Diggs</a>
+      <a class="back-link" href="../index.html#iam">← Back to IAM Projects</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">IAM-05 · Autumn Solutions</div>
+
+        <h1>Identity Threat & Workload Security</h1>
+
+        <p class="hero-copy">
+          I built a Python-based Microsoft Entra workload identity assessment
+          that evaluates application registrations, service principals,
+          credential lifecycle, ownership, and Microsoft Graph permissions.
+          The assessment identified 15 security findings and drove remediation
+          through least privilege, credential rotation, ownership governance,
+          and formal risk acceptance.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-05-workload-identity-security"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Technical Evidence on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="container metric-grid">
+        <div class="metric">
+          <div class="metric-value">15</div>
+          <div class="metric-label">Baseline findings</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">5</div>
+          <div class="metric-label">Applications assessed</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">5</div>
+          <div class="metric-label">Service principals assessed</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">0</div>
+          <div class="metric-label">Unresolved findings</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">01 / Challenge</div>
+
+        <div>
+          <h2>Assess the identities behind applications, not just users.</h2>
+
+          <p class="lead">
+            Workload identities can hold powerful directory permissions without
+            the authentication controls used for human accounts. Autumn
+            Solutions needed a repeatable way to identify application ownership
+            gaps, stale credentials, excessive permissions, and credentials
+            approaching expiration.
+          </p>
+
+          <div class="technology-list">
+            <span>Microsoft Entra ID</span>
+            <span>Microsoft Graph</span>
+            <span>Python</span>
+            <span>MSAL</span>
+            <span>Service Principals</span>
+            <span>App Registrations</span>
+            <span>OAuth 2.0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">02 / Solution</div>
+
+        <div>
+          <h2>Purpose-built workload identity assessment.</h2>
+
+          <p class="lead">
+            The assessor authenticates through a dedicated read-only Entra
+            application and queries Microsoft Graph for applications, local
+            service principals, owners, credentials, and application
+            permissions. Findings are classified and exported to structured
+            JSON and CSV reports.
+          </p>
+
+          <div class="architecture">
+IAM Administrator
+        ↓
+Python Workload Identity Assessor
+        ↓
+Microsoft Entra ID
+        ↓
+Microsoft Graph
+        ↓
+Applications · Service Principals · Owners · Credentials · Permissions
+        ↓
+Risk Evaluation
+        ↓
+Terminal Findings · JSON Report · CSV Report · Risk Decisions
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">03 / Remediation</div>
+
+        <div>
+          <h2>Findings were validated before changes were made.</h2>
+
+          <div class="remediation-grid">
+
+            <div class="remediation">
+              <div class="remediation-number">01</div>
+              <h3>Stale Secret Removal</h3>
+              <p>
+                Verified that the lifecycle automation had already migrated to
+                X.509 certificate authentication, then removed the obsolete
+                client secret without disrupting the workload.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">02</div>
+              <h3>Ownership Governance</h3>
+              <p>
+                Assigned a named IAM engineer as technical owner across the
+                relevant application registrations and enterprise application
+                service principals.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">03</div>
+              <h3>Least Privilege</h3>
+              <p>
+                Removed redundant Microsoft Graph application permissions,
+                revoked their existing consent grants, then obtained a new
+                certificate-authenticated token to validate the reduced role set.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">04</div>
+              <h3>OIDC Secret Rotation</h3>
+              <p>
+                Rotated the LedgerFlow OIDC credential, tested a successful
+                user sign-in with the new secret, and only then removed the
+                previous credential.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">04 / Risk Governance</div>
+
+        <div>
+          <h2>Required privilege remained visible instead of being hidden.</h2>
+
+          <p class="lead">
+            The remaining <strong>User.ReadWrite.All</strong> application
+            permission is required by the Joiner, Mover, Leaver workflow to
+            create, update, and disable Entra users. Removing it simply to
+            achieve a zero-finding scanner would break the business process.
+          </p>
+
+          <div class="risk-box">
+            <h3>Accepted High-Impact Permission</h3>
+
+            <p>
+              The permission was formally documented with a business
+              justification, technical owner, review date, and compensating
+              controls.
+            </p>
+
+            <ul>
+              <li>Certificate-based workload authentication</li>
+              <li>No client secret</li>
+              <li>Dedicated application identity</li>
+              <li>Named technical owner</li>
+              <li>Reduced Microsoft Graph permission set</li>
+              <li>Structured lifecycle audit logging</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">05 / Evidence</div>
+
+        <div>
+          <h2>Assessment and remediation evidence.</h2>
+
+          <div class="evidence-grid">
+
+            <figure>
+              <img
+                src="../assets/iam-05/01-Workload-Identity-Assessment-Baseline.png"
+                alt="Initial workload identity assessment showing baseline findings"
+              >
+              <figcaption>
+                Baseline assessment: 15 findings across five applications and
+                five local service principals.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-05/06-Least-Privilege-Token-Validation.png"
+                alt="Certificate authenticated token validation after least privilege remediation"
+              >
+              <figcaption>
+                Token validation confirmed the reduced Microsoft Graph
+                application permission set while required Graph operations
+                continued to return HTTP 200.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-05/09-LedgerFlow-OIDC-New-Secret-Validation.png"
+                alt="Successful LedgerFlow OIDC sign in after client secret rotation"
+              >
+              <figcaption>
+                Successful LedgerFlow OIDC authentication after controlled
+                client-secret rotation and before removal of the old credential.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-05/11-Workload-Identity-Assessment-Governed-Final-State.png"
+                alt="Final workload identity assessment with no unresolved findings"
+              >
+              <figcaption>
+                Final governed state: zero unresolved findings and one formally
+                accepted business-required high-impact permission.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result">
+      <div class="container">
+        <div class="eyebrow">Outcome</div>
+
+        <h2>15 detected findings to zero unresolved findings.</h2>
+
+        <p class="result-copy">
+          The project combined workload identity discovery, Microsoft Graph
+          permission analysis, service principal governance, credential
+          lifecycle management, least-privilege remediation, controlled
+          credential rotation, technical validation, and formal risk
+          acceptance. The result is a workload identity program that treats
+          non-human identities as governed security principals rather than
+          background application objects.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-05-workload-identity-security"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore GitHub Evidence
+          </a>
+
+          <a class="button" href="../index.html#iam">
+            View All IAM Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>Brenden Diggs</span>
+      <span>Identity Engineering · GRC · AI Governance</span>
+    </div>
+  </footer>
+
+</body>
+</html>

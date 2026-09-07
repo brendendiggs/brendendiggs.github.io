@@ -432,6 +432,31 @@
       color: var(--gold-light);
     }
 
+    .project-actions {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .project-link {
+      min-height: 42px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .project-link:hover {
+      background: var(--gold);
+      color: #17120b;
+    }
+
     /* GRC */
 
     .grc-section {
@@ -1063,9 +1088,10 @@
 
 
               <p class="project-description">
-                Extending the Autumn Solutions identity program into workload
-                identities, non-human access, credential risk, identity threat
-                detection, and automated workload identity assessment.
+                Built a Python and Microsoft Graph workload identity security
+                assessment that identified 15 application and service principal
+                findings, drove least-privilege and credential remediation, and
+                reduced the environment to zero unresolved findings.
               </p>
 
 
@@ -1080,6 +1106,20 @@
                 <span>Microsoft Graph</span>
                 <span>Python</span>
                 <span>Identity Threat Detection</span>
+              </div>
+
+              <div class="project-actions">
+                <a class="project-link" href="projects/iam-05-workload-identity-security.html">
+                  View Case Study
+                </a>
+                <a
+                  class="project-link"
+                  href="https://github.com/brendendiggs/autumn-solutions-iam-05-workload-identity-security"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub Evidence
+                </a>
               </div>
 
             </div>
