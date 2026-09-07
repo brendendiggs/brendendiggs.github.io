@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IAM-03 | Identity Lifecycle Automation | Brenden Diggs</title>
+
+  <meta
+    name="description"
+    content="Microsoft Entra identity lifecycle automation project covering HR-driven Joiner, Mover, Leaver workflows, Microsoft Graph, certificate authentication, access management, licensing, and audit logging."
+  >
+
+  <style>
+    :root {
+      --bg: #0d1014;
+      --bg-soft: #12161b;
+      --panel: #161b21;
+      --panel-warm: #1b1916;
+      --text: #f2eee7;
+      --text-soft: #d4cec4;
+      --muted: #a89f92;
+      --subtle: #81786d;
+      --gold: #d4aa55;
+      --gold-light: #efcf88;
+      --gold-dark: #9c7433;
+      --border: #37322c;
+      --border-soft: #292722;
+      --border-gold: #655236;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 16, 20, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 750;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 100px 0 84px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 930px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+
+    .hero-copy {
+      max-width: 830px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      font-size: 0.94rem;
+      font-weight: 700;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: #17120b;
+    }
+
+    .metrics {
+      padding: 28px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric {
+      padding: 20px 26px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric-value {
+      color: var(--gold-light);
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 750;
+    }
+
+    .metric-label {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    section.content {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 52px;
+    }
+
+    .section-marker {
+      padding-top: 5px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .technology-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .technology-list span {
+      padding: 9px 13px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .architecture {
+      margin-top: 34px;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.93rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+
+    .remediation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .remediation {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .remediation-number {
+      color: var(--gold);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .remediation h3 {
+      margin-top: 8px;
+      color: var(--gold-light);
+      font-size: 1.28rem;
+    }
+
+    .remediation p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .risk-box {
+      margin-top: 32px;
+      padding: 30px;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+    }
+
+    .risk-box h3 {
+      color: var(--gold-light);
+      font-size: 1.4rem;
+    }
+
+    .risk-box p {
+      margin-top: 13px;
+      color: var(--text-soft);
+    }
+
+    .risk-box ul {
+      margin: 18px 0 0 20px;
+      color: var(--muted);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 36px;
+    }
+
+    figure {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+    }
+
+    figcaption {
+      padding: 18px 20px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .result {
+      padding: 92px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .result-copy {
+      max-width: 850px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 1.12rem;
+      line-height: 1.85;
+    }
+
+    footer {
+      padding: 34px 0;
+      background: #080b0e;
+      color: var(--subtle);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 800px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Brenden Diggs</a>
+      <a class="back-link" href="../index.html#iam">← Back to IAM Projects</a>
+    </div>
+  </nav>
+
+  
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">IAM-03 · Autumn Solutions</div>
+
+        <h1>Identity Lifecycle Automation</h1>
+
+        <p class="hero-copy">
+          I built an HR-driven Joiner, Mover, Leaver automation for Microsoft
+          Entra ID. The workflow processes workforce events, manages identities,
+          department access and licensing through Microsoft Graph, authenticates
+          with an X.509 certificate, and records structured lifecycle audit
+          evidence.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-03-identity-lifecycle-automation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Technical Evidence on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="container metric-grid">
+        <div class="metric">
+          <div class="metric-value">3</div>
+          <div class="metric-label">Lifecycle workflows</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">6</div>
+          <div class="metric-label">HR events validated</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">Graph</div>
+          <div class="metric-label">Identity control plane</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">X.509</div>
+          <div class="metric-label">Workload authentication</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">01 / Challenge</div>
+
+        <div>
+          <h2>Turn HR lifecycle events into controlled identity changes.</h2>
+
+          <p class="lead">
+            Manual account creation, access changes, and offboarding create
+            inconsistency and increase the chance of excessive or lingering
+            access. Autumn Solutions needed a repeatable workflow that could
+            translate HR events into Microsoft Entra identity actions while
+            preserving auditability and least privilege.
+          </p>
+
+          <div class="technology-list">
+            <span>Microsoft Entra ID</span>
+            <span>Microsoft Graph</span>
+            <span>Node.js</span>
+            <span>Shell</span>
+            <span>X.509 Certificates</span>
+            <span>HR Automation</span>
+            <span>JML</span>
+            <span>Audit Logging</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">02 / Architecture</div>
+
+        <div>
+          <h2>HR events drive the identity lifecycle.</h2>
+
+          <p class="lead">
+            The automation separates the HR source, lifecycle decision logic,
+            Microsoft Graph authentication, identity actions, and audit
+            evidence. This keeps the workflow understandable and allows each
+            Joiner, Mover, or Leaver event to be traced from source through
+            execution.
+          </p>
+
+          <div class="architecture">
+HR Source Feed
+        ↓
+process_hr_events.sh
+        ↓
+        ├── Joiner Workflow
+        ├── Mover Workflow
+        └── Leaver Workflow
+        ↓
+Certificate-Authenticated Microsoft Graph Token
+        ↓
+Microsoft Entra ID
+        ↓
+Users · Department Groups · All-Employees Group · Licensing
+        ↓
+Structured Lifecycle Audit Log
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">03 / Lifecycle</div>
+
+        <div>
+          <h2>Automated Joiner, Mover, and Leaver controls.</h2>
+
+          <div class="remediation-grid">
+
+            <div class="remediation">
+              <div class="remediation-number">JOINER</div>
+              <h3>Provision Identity</h3>
+              <p>
+                Creates the Entra identity, applies workforce attributes,
+                assigns department access, adds the employee to the
+                organization-wide group, and assigns the required license.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">MOVER</div>
+              <h3>Reconcile Access</h3>
+              <p>
+                Updates workforce attributes and changes department-based group
+                access so authorization follows the employee's current business
+                role instead of accumulating indefinitely.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">LEAVER</div>
+              <h3>Disable and Reclaim</h3>
+              <p>
+                Disables the user, removes managed access, and reclaims the
+                assigned license so offboarding reduces both security exposure
+                and unnecessary license consumption.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">REPEAT</div>
+              <h3>Idempotent Processing</h3>
+              <p>
+                Lifecycle processing was designed so repeated execution does not
+                blindly recreate access or duplicate the same identity changes.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">04 / Workload Security</div>
+
+        <div>
+          <h2>Automation without embedding a reusable client secret.</h2>
+
+          <p class="lead">
+            The Microsoft Graph workload authenticates using an X.509
+            certificate and a signed client assertion. The private key is stored
+            outside the project directory and is never committed with the
+            automation source.
+          </p>
+
+          <div class="risk-box">
+            <h3>Certificate-Based Graph Authentication</h3>
+
+            <p>
+              The workload identity was separated from human administrator
+              authentication and designed for non-interactive Graph access.
+            </p>
+
+            <ul>
+              <li>Dedicated Microsoft Entra application identity</li>
+              <li>X.509 certificate authentication</li>
+              <li>Signed client assertion</li>
+              <li>Private key stored outside the project</li>
+              <li>Application permissions scoped to lifecycle requirements</li>
+              <li>No credential material published in the repository</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">05 / Auditability</div>
+
+        <div>
+          <h2>Lifecycle automation that leaves evidence behind.</h2>
+
+          <p class="lead">
+            Automated identity changes are written to a structured lifecycle
+            audit log. This creates evidence of which HR event was processed,
+            which lifecycle action occurred, and the resulting identity change.
+          </p>
+
+          <div class="remediation-grid">
+
+            <div class="remediation">
+              <div class="remediation-number">SOURCE</div>
+              <h3>HR-Driven Events</h3>
+              <p>
+                Lifecycle actions originate from the HR source instead of being
+                initiated as disconnected administrative changes.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">LOG</div>
+              <h3>Structured Audit Trail</h3>
+              <p>
+                Execution results are recorded in CSV format for troubleshooting,
+                control validation, and portfolio evidence.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">06 / Evidence</div>
+
+        <div>
+          <h2>Identity lifecycle execution and validation.</h2>
+
+          <div class="evidence-grid">
+
+            <figure>
+              <img
+                src="../assets/iam-03/01-HR-Source-Feed.png"
+                alt="HR source feed used for identity lifecycle automation"
+              >
+              <figcaption>
+                HR source data driving Joiner, Mover, and Leaver lifecycle
+                processing.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-03/08-Terminal-Joiner-Success.png"
+                alt="Successful automated Joiner workflow"
+              >
+              <figcaption>
+                Successful Joiner execution creating and configuring a new Entra
+                workforce identity.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-03/09-Terminal-Mover-Leaver-Success.png"
+                alt="Successful automated Mover and Leaver workflows"
+              >
+              <figcaption>
+                Mover and Leaver execution validating automated access change,
+                disablement, and lifecycle processing.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-03/11-Structured-Audit-Logging.png"
+                alt="Structured identity lifecycle audit log"
+              >
+              <figcaption>
+                Structured audit evidence generated by the automated lifecycle
+                workflow.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-03/14-Certificate-Graph-Authentication-Verified.png"
+                alt="Certificate authenticated Microsoft Graph workload identity"
+              >
+              <figcaption>
+                Successful Microsoft Graph authentication using the dedicated
+                certificate-based workload identity.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-03/15-Certificate-Authenticated-JML-Success.png"
+                alt="Certificate authenticated Joiner Mover Leaver automation success"
+              >
+              <figcaption>
+                End-to-end JML execution validated using certificate-authenticated
+                Microsoft Graph access.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result">
+      <div class="container">
+        <div class="eyebrow">Outcome</div>
+
+        <h2>HR events became auditable identity lifecycle actions.</h2>
+
+        <p class="result-copy">
+          IAM-03 connects identity engineering with business lifecycle events.
+          Joiners receive the required identity, access, and license state;
+          Movers have authorization reconciled as their role changes; and
+          Leavers are disabled, stripped of managed access, and have licenses
+          reclaimed. Microsoft Graph performs the identity changes while
+          certificate-based authentication and structured logging strengthen
+          the security and auditability of the automation itself.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-03-identity-lifecycle-automation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore GitHub Evidence
+          </a>
+
+          <a class="button" href="../index.html#iam">
+            View All IAM Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>Brenden Diggs</span>
+      <span>Identity Engineering · GRC · AI Governance</span>
+    </div>
+  </footer>
+
+</body>
+</html>
