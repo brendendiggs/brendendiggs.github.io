@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IAM-01 | Zero Trust Identity Security | Brenden Diggs</title>
+
+  <meta
+    name="description"
+    content="Microsoft Entra Zero Trust identity security project covering Conditional Access, phishing-resistant MFA, Identity Protection, PIM, emergency access, and legacy authentication."
+  >
+
+  <style>
+    :root {
+      --bg: #0d1014;
+      --bg-soft: #12161b;
+      --panel: #161b21;
+      --panel-warm: #1b1916;
+      --text: #f2eee7;
+      --text-soft: #d4cec4;
+      --muted: #a89f92;
+      --subtle: #81786d;
+      --gold: #d4aa55;
+      --gold-light: #efcf88;
+      --gold-dark: #9c7433;
+      --border: #37322c;
+      --border-soft: #292722;
+      --border-gold: #655236;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 16, 20, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 750;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 100px 0 84px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 930px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-weight: 720;
+    }
+
+    .hero-copy {
+      max-width: 830px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      font-size: 0.94rem;
+      font-weight: 700;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: #17120b;
+    }
+
+    .metrics {
+      padding: 28px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric {
+      padding: 20px 26px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric-value {
+      color: var(--gold-light);
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 750;
+    }
+
+    .metric-label {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    section.content {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 52px;
+    }
+
+    .section-marker {
+      padding-top: 5px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .technology-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .technology-list span {
+      padding: 9px 13px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .architecture {
+      margin-top: 34px;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border-gold);
+      color: var(--text-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.93rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+
+    .remediation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .remediation {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .remediation-number {
+      color: var(--gold);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .remediation h3 {
+      margin-top: 8px;
+      color: var(--gold-light);
+      font-size: 1.28rem;
+    }
+
+    .remediation p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .risk-box {
+      margin-top: 32px;
+      padding: 30px;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+    }
+
+    .risk-box h3 {
+      color: var(--gold-light);
+      font-size: 1.4rem;
+    }
+
+    .risk-box p {
+      margin-top: 13px;
+      color: var(--text-soft);
+    }
+
+    .risk-box ul {
+      margin: 18px 0 0 20px;
+      color: var(--muted);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 36px;
+    }
+
+    figure {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+    }
+
+    figcaption {
+      padding: 18px 20px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .result {
+      padding: 92px 0;
+      background: var(--panel-warm);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .result-copy {
+      max-width: 850px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 1.12rem;
+      line-height: 1.85;
+    }
+
+    footer {
+      padding: 34px 0;
+      background: #080b0e;
+      color: var(--subtle);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 800px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .metric-grid,
+      .remediation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Brenden Diggs</a>
+      <a class="back-link" href="../index.html#iam">← Back to IAM Projects</a>
+    </div>
+  </nav>
+
+  
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">IAM-01 · Autumn Solutions</div>
+
+        <h1>Zero Trust Identity Security</h1>
+
+        <p class="hero-copy">
+          I designed and validated a layered Microsoft Entra identity security
+          architecture using Conditional Access, phishing-resistant MFA,
+          Identity Protection, Privileged Identity Management, emergency access,
+          and legacy authentication controls.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-01-zero-trust-identity-security"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Technical Evidence on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="container metric-grid">
+        <div class="metric">
+          <div class="metric-value">5</div>
+          <div class="metric-label">Conditional Access controls</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">2</div>
+          <div class="metric-label">Emergency access accounts</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">1</div>
+          <div class="metric-label">Hardened PIM workflow</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-value">21</div>
+          <div class="metric-label">Technical evidence captures</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">01 / Challenge</div>
+
+        <div>
+          <h2>Reduce identity risk without creating a single point of failure.</h2>
+
+          <p class="lead">
+            Autumn Solutions needed stronger identity controls for workforce and
+            privileged access while preserving emergency administrator access.
+            The design needed to enforce Zero Trust principles without locking
+            out recovery accounts or deploying untested controls directly into
+            production.
+          </p>
+
+          <div class="technology-list">
+            <span>Microsoft Entra ID</span>
+            <span>Conditional Access</span>
+            <span>Identity Protection</span>
+            <span>PIM</span>
+            <span>Phishing-Resistant MFA</span>
+            <span>Zero Trust</span>
+            <span>Emergency Access</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">02 / Architecture</div>
+
+        <div>
+          <h2>Layered identity controls with staged validation.</h2>
+
+          <p class="lead">
+            Conditional Access policies were designed around user context,
+            authentication strength, identity risk, privileged access, and
+            legacy protocol exposure. Controls were validated with pilot
+            targeting, report-only deployment, What If analysis, and sign-in
+            evidence before enforcement decisions.
+          </p>
+
+          <div class="architecture">
+Users and Administrators
+        ↓
+Microsoft Entra ID
+        ↓
+Conditional Access + Identity Protection
+        ↓
+MFA · Authentication Strength · Sign-In Risk · User Risk
+        ↓
+Privileged Identity Management
+        ↓
+Time-Bound Privileged Role Activation
+        ↓
+Emergency Access Exclusions + Legacy Authentication Blocking
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">03 / Security Controls</div>
+
+        <div>
+          <h2>Defense in depth across authentication, risk, and privilege.</h2>
+
+          <div class="remediation-grid">
+
+            <div class="remediation">
+              <div class="remediation-number">01</div>
+              <h3>Staged MFA Enforcement</h3>
+              <p>
+                Built an MFA Conditional Access policy using a dedicated pilot
+                group, report-only deployment, What If validation, and sign-in
+                evidence before broader enforcement.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">02</div>
+              <h3>Phishing-Resistant Admin MFA</h3>
+              <p>
+                Applied stronger authentication requirements to privileged
+                administrators using phishing-resistant authentication strength
+                instead of relying only on standard MFA.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">03</div>
+              <h3>Risk-Based Sign-In Protection</h3>
+              <p>
+                Configured Conditional Access to respond to risky sign-ins with
+                an MFA requirement and validated the decision path using Entra
+                What If analysis.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">04</div>
+              <h3>Risky User Remediation</h3>
+              <p>
+                Added identity-risk controls for compromised-user scenarios so
+                remediation requirements are driven by user risk rather than
+                static access rules alone.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">05</div>
+              <h3>Privileged Identity Management</h3>
+              <p>
+                Hardened privileged role activation through Microsoft Entra PIM
+                with activation requirements and auditable time-bound elevation
+                instead of permanent administrative access.
+              </p>
+            </div>
+
+            <div class="remediation">
+              <div class="remediation-number">06</div>
+              <h3>Legacy Authentication Blocking</h3>
+              <p>
+                Designed a Conditional Access control to block legacy
+                authentication protocols that cannot satisfy modern MFA and
+                Zero Trust requirements.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">04 / Resilience</div>
+
+        <div>
+          <h2>Emergency access remained protected from accidental lockout.</h2>
+
+          <p class="lead">
+            Two dedicated emergency Global Administrator accounts were
+            intentionally excluded from applicable Conditional Access policies.
+            The exclusions were validated rather than assumed, preserving a
+            recovery path if normal authentication controls become unavailable.
+          </p>
+
+          <div class="risk-box">
+            <h3>Break-Glass Design</h3>
+
+            <p>
+              Emergency accounts were treated as a resilience control, not as
+              ordinary administrator identities.
+            </p>
+
+            <ul>
+              <li>Dedicated emergency Global Administrator identities</li>
+              <li>Explicit Conditional Access exclusions</li>
+              <li>What If validation of exclusion behavior</li>
+              <li>Separate treatment from everyday privileged accounts</li>
+              <li>Protection against administrator lockout scenarios</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container section-grid">
+        <div class="section-marker">05 / Evidence</div>
+
+        <div>
+          <h2>Control validation across the Zero Trust identity stack.</h2>
+
+          <div class="evidence-grid">
+
+            <figure>
+              <img
+                src="../assets/iam-01/03-CA-MFA-What-If-Validation.png"
+                alt="Conditional Access MFA What If validation"
+              >
+              <figcaption>
+                What If analysis validating the staged MFA Conditional Access
+                decision before enforcement.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-01/08-CA002-BreakGlass-Exclusion-Validation.png"
+                alt="Emergency access Conditional Access exclusion validation"
+              >
+              <figcaption>
+                Validation that emergency access accounts remain excluded from
+                the privileged authentication policy.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-01/11-CA003-What-If-Risky-SignIn.png"
+                alt="Risky sign in Conditional Access validation"
+              >
+              <figcaption>
+                Risk-based Conditional Access validation for risky sign-in
+                scenarios.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-01/14-CA004-What-If-Risky-User.png"
+                alt="Risky user Conditional Access validation"
+              >
+              <figcaption>
+                Identity Protection and Conditional Access validation for
+                elevated user risk.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-01/19-PIM-Hardened-Activation-Flow.png"
+                alt="Microsoft Entra PIM privileged role activation"
+              >
+              <figcaption>
+                Hardened privileged role activation through Microsoft Entra
+                Privileged Identity Management.
+              </figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="../assets/iam-01/21-CA005-What-If-Legacy-Auth.png"
+                alt="Conditional Access legacy authentication block validation"
+              >
+              <figcaption>
+                What If validation confirming the legacy authentication blocking
+                policy decision.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result">
+      <div class="container">
+        <div class="eyebrow">Outcome</div>
+
+        <h2>A layered Zero Trust identity control plane.</h2>
+
+        <p class="result-copy">
+          The final architecture combines staged MFA deployment,
+          phishing-resistant authentication for administrators, risk-based
+          identity protection, time-bound privileged access, emergency access
+          resilience, and legacy authentication blocking. Controls were
+          validated before enforcement so the project demonstrates not only how
+          to configure Microsoft Entra security, but how to deploy it safely.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="button"
+            href="https://github.com/brendendiggs/autumn-solutions-iam-01-zero-trust-identity-security"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore GitHub Evidence
+          </a>
+
+          <a class="button" href="../index.html#iam">
+            View All IAM Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>Brenden Diggs</span>
+      <span>Identity Engineering · GRC · AI Governance</span>
+    </div>
+  </footer>
+
+</body>
+</html>
