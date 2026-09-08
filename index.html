@@ -1291,22 +1291,7 @@
     /* end-knowbe4-one-line-final */
 
 
-    /* core-expertise-one-line-final */
-
-    @media (min-width: 761px) {
-      .core-expertise-item .summary-value {
-        white-space: nowrap;
-        font-size: 0.94em;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .core-expertise-item .summary-value {
-        white-space: normal;
-      }
-    }
-
-    /* end-core-expertise-one-line-final */
+    
 
 
     /* enterprise-card-tighten-final */
@@ -1346,6 +1331,70 @@
     }
 
     /* end-enterprise-card-full-center-final */
+
+
+    /* core-expertise-font-match-final */
+
+    .professional-summary .summary-value {
+      font-size: 1rem;
+    }
+
+    @media (min-width: 761px) {
+      .core-expertise-item .summary-value {
+        white-space: nowrap;
+        letter-spacing: -0.015em;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .core-expertise-item .summary-value {
+        white-space: normal;
+      }
+    }
+
+    /* end-core-expertise-font-match-final */
+
+
+    
+
+
+    
+
+
+    
+
+
+    /* enterprise-description-vertical-center-final */
+
+    .enterprise-grid {
+      align-items: stretch;
+    }
+
+    .enterprise-description {
+      align-self: center;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* end-enterprise-description-vertical-center-final */
+
+
+    /* autumn-maple-hard-fix */
+
+    .autumn-brand-mark {
+      width: min(420px, 82%);
+      margin: 26px auto 0;
+      display: block;
+    }
+
+    .autumn-maple-mark {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* end-autumn-maple-hard-fix */
 
 </style>
 </head>
@@ -1492,12 +1541,19 @@
           <h2>
             Autumn Solutions
           </h2>
+          <div class="autumn-brand-mark" aria-hidden="true">
+            <img
+              src="assets/branding/autumn-maple-mark-v4.png?v=4"
+              alt=""
+              class="autumn-maple-mark"
+            >
+          </div>
+          
 
         </div>
 
         <p class="enterprise-description">
-          Autumn Solutions is the fictional enterprise used throughout this
-          portfolio. The projects model one connected identity security
+          Autumn Solutions is the enterprise lab environment used throughout this portfolio. The projects model one connected identity security
           program across authentication, federation, lifecycle automation,
           access governance, privileged access, and workload identity security.
         </p>
