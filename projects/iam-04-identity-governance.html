@@ -604,7 +604,98 @@
 
     /* end-iam-evidence-layout-corrected-final */
 
-</style>
+/* IAM walkthrough */
+    .walkthrough-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .walkthrough-card {
+      padding: 30px;
+      background: var(--panel-warm);
+      border: 1px solid var(--border-gold);
+    }
+
+    .walkthrough-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+
+    .walkthrough-copy {
+      max-width: 720px;
+    }
+
+    .walkthrough-kicker {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .walkthrough-card h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 3vw, 2.65rem);
+    }
+
+    .walkthrough-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid var(--border);
+    }
+
+    .video-frame iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .walkthrough-youtube-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .walkthrough-youtube-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 760px) {
+      .walkthrough-section {
+        padding: 56px 0;
+      }
+
+      .walkthrough-card {
+        padding: 18px;
+      }
+
+      .walkthrough-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .walkthrough-top .button {
+        width: 100%;
+      }
+    }
+
+
+  </style>
 
 <style>
   .lifecycle-grid {
@@ -690,7 +781,11 @@
         >
           View GitHub
         </a>
-      </div>
+      
+        <a class="button" href="#video-walkthrough">
+          Watch Walkthrough
+        </a>
+</div>
     </div>
   </header>
 
@@ -724,7 +819,52 @@
   </section>
 
 
-  <section class="content">
+  
+    <section class="walkthrough-section" id="video-walkthrough">
+      <div class="container">
+        <div class="walkthrough-card">
+
+          <div class="walkthrough-top">
+            <div class="walkthrough-copy">
+              <div class="walkthrough-kicker">
+                Video Walkthrough · 2–3 min
+              </div>
+
+              <h2>See the project in action</h2>
+
+              <p>
+                A concise walkthrough of the architecture, Microsoft Entra
+                configuration, controls, and validation evidence behind this
+                project.
+              </p>
+            </div>
+          </div>
+
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/mKYtYUfVH1c"
+              title="Identity Governance portfolio walkthrough"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <a
+            class="walkthrough-youtube-link"
+            href="https://youtu.be/mKYtYUfVH1c"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open on YouTube ↗
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+<section class="content">
     <div class="container section-grid">
 
       <div class="section-marker">
@@ -795,8 +935,7 @@
     </div>
   </section>
 
-
-  <section class="content">
+<section class="content">
     <div class="container section-grid">
 
       <div class="section-marker">
